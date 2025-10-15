@@ -25,7 +25,7 @@ function ForgotPassword() {
     try {
       // Llama a la función de Supabase para enviar el correo de recuperación
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:5173/updatepassword', // URL a la que será redirigido el usuario desde el correo
+        redirectTo: 'https://edubeats2.vercel.app/updatepassword', // URL a la que será redirigido el usuario desde el correo
       });
 
       if (error) {
