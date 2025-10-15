@@ -1,0 +1,178 @@
+/* --- Variables de Color y Estilos Globales (Paleta Profesional) --- */
+:root {
+  --primary-accent: #5a76f3;
+  --secondary-accent: #5314b8;
+  --bg-dark: #5c39db;
+  --card-bg: rgba(30, 41, 59, 0.5);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --error-color: #ff8a8a;
+  --success-color: #7edda9;
+  --warning-color: #facc15;
+}
+
+/* --- Contenedor Principal --- */
+.admin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centrado verticalmente para el login */
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* --- Estilos para la Tarjeta de Acceso del Administrador --- */
+.admin-login-card {
+  width: 100%;
+  max-width: 450px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.admin-login-input {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.admin-login-input:focus {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(90, 118, 243, 0.3);
+}
+
+.upload-button.access-button {
+  width: 100%;
+  margin-top: 1.5rem;
+  background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
+}
+
+.upload-button.access-button:hover {
+  box-shadow: 0 8px 25px rgba(90, 118, 243, 0.35);
+}
+
+
+/* --- Estilos para el Panel Principal del Administrador --- */
+.admin-card {
+  width: 100%;
+  max-width: 800px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.admin-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.admin-disclaimer {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 auto 2rem auto;
+  text-align: center;
+}
+
+.section-title {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Lista de Usuarios --- */
+.user-list-section {
+  margin-top: 2rem;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--card-border);
+  color: var(--text-secondary);
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+.user-item span:first-child {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.no-users-message {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+
+/* --- Botones --- */
+.upload-button.delete-button {
+  background: linear-gradient(90deg, #c44d56, #e11d48); /* Gradiente rojo para peligro */
+  width: 100%;
+}
+
+.upload-button.delete-button:hover {
+  box-shadow: 0 8px 25px rgba(225, 29, 72, 0.35);
+}
+
+/* --- Mensajes de Feedback --- */
+.form-error, .form-success, .security-warning {
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 1.5rem 0;
+  font-weight: 500;
+}
+
+.form-error {
+  background-color: rgba(255, 82, 82, 0.1);
+  color: var(--error-color);
+  border: 1px solid rgba(255, 82, 82, 0.2);
+}
+
+.form-success {
+  background-color: rgba(0, 200, 83, 0.1);
+  color: var(--success-color);
+  border: 1px solid rgba(0, 200, 83, 0.2);
+}
+
+.security-warning {
+  background-color: rgba(250, 204, 21, 0.1);
+  color: var(--warning-color);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+}
