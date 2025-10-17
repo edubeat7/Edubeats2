@@ -1,7 +1,7 @@
 /* --- Paleta de Colores y Estilos Globales --- */
 :root {
-  --primary-accent: #8A2BE2; /* Un violeta vibrante para un look musical */
-  --secondary-accent: #40E0D0; /* Turquesa para gradientes y acentos */
+  --primary-accent: #361257; /* Un violeta vibrante para un look musical */
+  --secondary-accent: #ffffff; /* Turquesa para gradientes y acentos */
   --bg-dark: #121212; /* Fondo negro profundo, estilo Spotify */
   --card-bg: rgba(28, 28, 40, 0.65); /* Glassmorphism con un tinte púrpura oscuro */
   --card-border: rgba(255, 255, 255, 0.1);

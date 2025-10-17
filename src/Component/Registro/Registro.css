@@ -1,185 +1,156 @@
-/* --- Variables de Color y Estilos Globales (Paleta Profesional) --- */
-:root {
-  --primary-accent: #5a76f3;       /* Azul claro, limpio y moderno para acentos */
-  --secondary-accent: #5314b8;    /* Un toque de Teal para gradientes sutiles */
-  --bg-dark: #5c39db;              /* Fondo azul pizarra oscuro (muy profesional) */
-  --card-bg: rgba(30, 41, 59, 0.5); /* Glassmorphism con base oscura */
-  --card-border: rgba(255, 255, 255, 0.1);
-  --text-primary: #f8fafc;         /* Blanco ligeramente suavizado (más agradable a la vista) */
-  --text-secondary: #94a3b8;      /* Gris azulado para texto secundario */
-  --error-color: #ff8a8a;          /* Rojo claro para mensajes de error */
-  --success-color: #7edda9;       /* Verde claro para mensajes de éxito */
-}
+/* --- Registro.css (Mobile-First & Responsive) --- */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
-  line-height: 1.5;
-}
-
-/* --- Contenedor Principal --- */
+/* 1. Main Container & Layout */
 .signup-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: center; /* Vertically centers the content */
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 1rem;
+  padding-top: 5rem; /* Provides space for a fixed navbar */
   box-sizing: border-box;
 }
 
 .signup-form {
   width: 100%;
-  max-width: 450px; /* Ancho consistente con el formulario de login */
+  max-width: 450px; /* An ideal width for a form on most screens */
+  text-align: center;
 }
 
+/* 2. Logo Styling */
 .logo-container {
-  text-align: center;
   margin-bottom: 2rem;
 }
 
 .App-logo {
-  height: 80px;
-  pointer-events: none;
-  filter: drop-shadow(0 0 12px rgba(90, 118, 243, 0.5));
+  height: 90px;
+  /* A subtle floating animation for a modern feel */
+  animation: logo-float 6s ease-in-out infinite;
 }
 
-/* --- Tarjeta de Contenido (Efecto "Glassmorphism") --- */
+@keyframes logo-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+/* 3. Registration Card */
 .signup-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  padding: 2rem 1.5rem;
+  border-radius: 16px; /* Soft, modern corners */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-out;
 }
 
-/* --- Tipografía --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 4. Typography */
 .signup-title {
-  font-size: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: var(--text-primary);
+  font-size: clamp(1.8rem, 5vw, 2rem); /* Responsive font size */
+  color: #5e35b1; /* Primary color */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .signup-disclaimer {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin: 0 auto 2rem auto;
-  text-align: center;
+  color: #616161; /* Softer text color for subtitles */
+  margin-bottom: 2.5rem;
 }
 
-/* --- Estilos Específicos del Formulario de Registro --- */
+/* 5. Input Fields & Labels */
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 1.25rem; /* Space between form fields */
+  margin-bottom: 1.5rem;
 }
 
 .input-label {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
+  text-align: left;
+}
+
+.input-label span {
+  display: block;
   font-weight: 500;
-  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  color: #212121;
 }
 
 .signup-input {
-  background-color: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
+  width: 100%;
   padding: 14px 16px;
-  color: var(--text-primary);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
   font-size: 1rem;
-  margin-top: 0.5rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  outline: none;
+  background-color: #f4f6f8;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .signup-input:focus {
-  border-color: var(--primary-accent);
-  box-shadow: 0 0 0 3px rgba(90, 118, 243, 0.3);
+  outline: none;
+  border-color: #5e35b1;
+  box-shadow: 0 0 0 3px rgba(94, 53, 177, 0.15); /* Focus ring for accessibility */
 }
 
-/* --- Mensajes de Error y Éxito --- */
+/* 6. Feedback Messages (Error/Success) */
 .signup-error, .signup-success {
   padding: 12px;
-  border-radius: 8px;
-  text-align: center;
+  border-radius: 12px;
   margin-bottom: 1.5rem;
+  font-size: 0.9rem;
   font-weight: 500;
+  text-align: center;
 }
 
 .signup-error {
-  background-color: rgba(255, 82, 82, 0.1);
-  color: var(--error-color);
-  border: 1px solid rgba(255, 82, 82, 0.2);
+  background-color: rgba(229, 57, 53, 0.1);
+  color: #e53935; /* Red for errors */
 }
 
 .signup-success {
-  background-color: rgba(0, 200, 83, 0.1);
-  color: var(--success-color);
-  border: 1px solid rgba(0, 200, 83, 0.2);
+  background-color: rgba(67, 160, 71, 0.1);
+  color: #43a047; /* Green for success */
 }
 
-/* --- Botón de Acción --- */
-/* Se reutiliza la clase .upload-button para la base, y .signup-button para los márgenes */
-.upload-button {
-  display: block;
-  width: 100%;
-  padding: 14px 30px;
-  border: none;
-  border-radius: 50px;
-  font-weight: bold;
-  font-size: 1rem;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
-  background-size: 200% auto;
-  transition: all 0.4s ease-in-out;
-}
-
+/* 7. Buttons & Links */
 .signup-button {
-  margin: 1.5rem auto 0 auto;
-}
-
-.upload-button:hover {
-  transform: translateY(-4px);
-  background-position: right center;
-  box-shadow: 0 8px 25px rgba(90, 118, 243, 0.35);
-}
-
-/* --- Estilo para enlaces --- */
-.signup-disclaimer a {
-  color: var(--primary-accent);
-  text-decoration: none;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #5e35b1, #1e88e5);
+  color: white;
+  font-size: 1.1rem;
   font-weight: 600;
-  transition: color 0.3s ease;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signup-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 25px rgba(94, 53, 177, 0.25);
+}
+
+.signup-disclaimer a {
+  color: #5e35b1;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .signup-disclaimer a:hover {
   text-decoration: underline;
-  color: var(--text-primary);
 }
 
+/* --- Media Queries for Responsiveness --- */
 
-/* --- Ajustes para Móviles --- */
-@media (max-width: 768px) {
-  .signup-container {
-    padding: 1rem;
-  }
+/* For tablets and larger screens (from 600px) */
+@media (min-width: 600px) {
   .signup-card {
-    padding: 2rem 1.5rem;
-  }
-  .signup-title {
-    font-size: 2rem;
+    padding: 2.5rem; /* More whitespace on larger screens */
   }
 }

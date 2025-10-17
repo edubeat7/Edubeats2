@@ -87,6 +87,12 @@ function Login() {
               {isLoading ? 'Procesando...' : 'Acceder'}
             </button>
 
+              <p className="login-disclaimer">
+              Reistro{' '}
+              <a href="/Pago1">
+                No tienes cuenta registrate aqui
+              </a>
+              </p>
             <p className="login-disclaimer">
               ¿Olvidaste tu contraseña?{' '}
               <a href="/Restablecer">

@@ -15,6 +15,8 @@ import PruebaAutomatica from "./Component/PruebaAutomatica/PruebaAutomatica";
 import PaginaAudio from "./Component/PaginaAudio/PaginaAudio";
 import ListaProveedores from "./Component/ListaProveedores/ListaProveedores";
 
+import PaymentRoute from './Component/PaymentRoute'; // Asegúrate que la ruta sea correcta
+
 // ¡Paso 1: Importa el componente ProtectedRoute!
 // (Asegúrate de que la ruta al archivo sea la correcta en tu proyecto)
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute'; // Ajusta esta ruta si es necesario
@@ -47,6 +49,12 @@ function App() {
             <UpdatePassword />
           </Route>
           
+
+          <Route exact path="/Registro">
+            <PaymentRoute>
+              <Registro />
+            </PaymentRoute>
+          </Route>
           {/* --- RUTAS PROTEGIDAS (Requieren inicio de sesión) --- */}
           {/* Paso 2: Envuelve cada componente protegido con <ProtectedRoute> */}
           <Route exact path="/MenuPaginas">

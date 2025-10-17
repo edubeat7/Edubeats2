@@ -1,176 +1,129 @@
-/* --- Variables de Color y Estilos Globales (Paleta Profesional) --- */
-:root {
-  --primary-accent: #5a76f3;       /* Azul claro, limpio y moderno para acentos */
-  --secondary-accent: #5314b8;    /* Un toque de Teal para gradientes sutiles */
-  --bg-dark: #5c39db;              /* Fondo azul pizarra oscuro (muy profesional) */
-  --card-bg: rgba(30, 41, 59, 0.5); /* Glassmorphism con base oscura */
-  --card-border: rgba(255, 255, 255, 0.1);
-  --text-primary: #f8fafc;         /* Blanco ligeramente suavizado (más agradable a la vista) */
-  --text-secondary: #94a3b8;      /* Gris azulado para texto secundario */
-}
+/* --- Home.css (Mobile-First & Responsive) --- */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
-  line-height: 1.5;
-}
-
-/* --- Contenedor Principal --- */
+/* 1. Contenedor Principal y Layout */
 .login-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  padding: 2rem;
-  box-sizing: border-box;
-}
-
-.login-form {
+  /* Espacio para el Navbar y en la parte inferior */
+  padding: 6rem 1rem 3rem 1rem;
   width: 100%;
-  max-width: 900px;
+  min-height: 100vh;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
 }
 
+/* 2. Logo */
 .logo-container {
-  text-align: center;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .App-logo {
-  height: 80px;
-  pointer-events: none;
-  /* Sombra de color azul para el logo, a juego con la nueva paleta */
-  filter: drop-shadow(0 0 12px rgba(14, 165, 233, 0.5));
+  height: 100px;
+  max-width: 100%;
+  /* Animación sutil para un toque dinámico */
+  animation: logo-float 6s ease-in-out infinite;
 }
 
-/* --- Tarjeta de Contenido (Efecto "Glassmorphism") --- */
+/* Animación para el logo */
+@keyframes logo-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* 3. Tarjeta Principal de Contenido */
 .login-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px; /* Ancho máximo en móviles */
+  padding: 2rem 1.5rem;
+  border-radius: 16px; /* Bordes más redondeados y modernos */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-/* --- Tipografía Mejorada (Título en Blanco) --- */
 .login-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  /* El título ahora es de color blanco sólido, como se solicitó */
-  color: var(--text-primary);
-  /* Se eliminaron las propiedades de gradiente */
+  font-size: clamp(1.8rem, 5vw, 2.2rem); /* Tipografía fluida que se adapta */
+  color: #5e35b1; /* Color primario */
+  margin-bottom: 0.75rem;
 }
 
 .login-disclaimer {
-  font-size: 1.1rem;
+  color: #616161; /* Texto sutil */
+  margin-bottom: 2.5rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto 2.5rem auto;
-  text-align: center;
 }
 
-/* --- Grid de Características --- */
+/* 4. Grilla de Características (Features) */
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  display: flex;
+  flex-direction: column; /* Apilado en móviles para fácil lectura */
+  gap: 1rem;
+  text-align: left;
 }
 
 .feature-item {
-  background: rgba(30, 41, 59, 0.7); /* Fondo sutilmente más opaco */
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 1px solid transparent;
-  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  background-color: #f4f6f8; /* Fondo ligeramente diferente */
+  padding: 1.25rem;
+  border-radius: 12px;
+  border-left: 4px solid #1e88e5; /* Color secundario como acento */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-item:hover {
-  transform: translateY(-8px);
-  background: rgba(30, 41, 59, 0.9);
-  /* Borde azul de acento al pasar el cursor */
-  border-color: var(--primary-accent);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
 .feature-item h3 {
-  color: var(--text-primary);
-  margin-top: 0;
-  margin-bottom: 0.8rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  color: #5e35b1;
+  margin-bottom: 0.25rem;
 }
 
 .feature-item p {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  color: #616161;
   line-height: 1.5;
 }
 
-/* --- Botón de Acción con Gradiente --- */
-.upload-button {
-  display: inline-block;
-  padding: 14px 30px;
-  border: none;
-  border-radius: 50px;
-  font-weight: bold;
-  font-size: 1rem;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  /* Gradiente profesional usando la nueva paleta de acentos */
-  background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
-  background-size: 200% auto;
-  transition: all 0.4s ease-in-out;
-}
-
+/* 5. Botón de Acción Principal */
 .login-button {
-  max-width: 220px;
-  margin: 2rem auto 0 auto;
-  display: block;
-  text-align: center;
+  display: inline-block; /* Permite centrar con margin auto */
+  width: 100%;
+  max-width: 250px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #5e35b1, #1e88e5);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 2.5rem auto 0 auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.upload-button:hover {
-  transform: translateY(-4px);
-  background-position: right center;
-  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.35);
+.login-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 25px rgba(94, 53, 177, 0.25);
 }
 
-.upload-button::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  animation: buttonShine 4s infinite linear;
-}
+/* --- Media Queries para Responsividad --- */
 
-@keyframes buttonShine {
-  0% { transform: rotate(45deg) translateX(-200%); }
-  100% { transform: rotate(45deg) translateX(200%); }
-}
-
-/* --- Ajustes para Móviles --- */
-@media (max-width: 768px) {
-  .login-container {
-    padding: 1rem;
-  }
+/* Para tablets (a partir de 768px) */
+@media (min-width: 768px) {
   .login-card {
-    padding: 1.5rem;
+    max-width: 900px;
+    padding: 3rem;
   }
-  .login-title {
-    font-size: 2.2rem;
-  }
+
   .features-grid {
-    grid-template-columns: 1fr;
+    display: grid;
+    /* Dos columnas con tamaño mínimo de 250px */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
   }
 }

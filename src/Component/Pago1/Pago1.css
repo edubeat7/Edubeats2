@@ -1,184 +1,171 @@
-/* --- Variables de Color y Estilos Globales (Paleta Profesional) --- */
-:root {
-  --primary-accent: #5a76f3;       /* Azul claro, limpio y moderno para acentos */
-  --secondary-accent: #5314b8;    /* Morado para gradientes */
-  --bg-dark: #5c39db;              /* Fondo principal */
-  --card-bg: rgba(30, 41, 59, 0.5); /* Glassmorphism con base oscura */
-  --card-border: rgba(255, 255, 255, 0.1);
-  --text-primary: #f8fafc;         /* Blanco ligeramente suavizado */
-  --text-secondary: #94a3b8;      /* Gris azulado para texto secundario */
-  --whatsapp-green: #25D366;      /* Color oficial de WhatsApp */
-  --error-color: #ff8a8a;          /* Rojo claro para mensajes de error */
-}
+/* --- Pago1.css (Mobile-First & Responsive) --- */
 
-/* --- Estilos Base --- */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
-  line-height: 1.5;
-}
-
-.container {
-  width: 100%;
-}
-
-/* --- Contenedor de Pago --- */
+/* 1. Main Container & Layout */
 .payment-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: center; /* Center the card vertically */
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 1rem;
+  padding-top: 5rem; /* Space for the fixed Navbar */
   box-sizing: border-box;
 }
 
-/* --- Tarjeta de Pago --- */
+/* 2. The Main Card */
 .payment-card {
+  background-color: #ffffff;
   width: 100%;
-  max-width: 600px;
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 550px; /* A good width for informational content */
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-}
-
-.header-title {
-  font-size: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: var(--text-primary);
-}
-
-.payment-instruction {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-}
-
-.payment-instruction.strong {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-/* --- Estilos para la Verificación de Clave --- */
-.key-check-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.challenge-number {
-  color: var(--primary-accent);
-  font-size: 1.5rem;
-  margin-left: 0.5rem;
-}
-
-.key-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 350px;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.key-input {
-  background-color: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 14px 16px;
-  color: var(--text-primary);
-  font-size: 1rem;
-  text-align: center;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  outline: none;
-}
-
-.key-input:focus {
-  border-color: var(--primary-accent);
-  box-shadow: 0 0 0 3px rgba(90, 118, 243, 0.3);
-}
-
-.error-message {
-  color: var(--error-color);
-  font-weight: 500;
-  margin-top: 1rem;
-  background-color: rgba(255, 82, 82, 0.1);
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 350px;
-  box-sizing: border-box;
-}
-
-/* --- Sección de Pago Alternativo --- */
-.alternative-payment {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--card-border);
-}
-
-/* --- Botones --- */
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 14px 30px;
-  border: none;
-  border-radius: 50px;
-  font-weight: bold;
-  font-size: 1rem;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
+  /* Smooth transition between steps */
   transition: all 0.3s ease-in-out;
 }
 
-.button--primary {
-  background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
-  box-shadow: 0 4px 15px rgba(90, 118, 243, 0.2);
+/* 3. Shared Content Styles */
+.header-title {
+  font-size: clamp(1.8rem, 5vw, 2rem); /* Fluid typography */
+  color: #5e35b1; /* Primary color */
+  margin-bottom: 1.5rem;
 }
 
-.button--primary:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(90, 118, 243, 0.35);
+.payment-instruction {
+  color: #616161; /* Subtle text color */
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+.payment-instruction strong {
+  color: #212121; /* Darker text for emphasis */
+}
+
+/* 4. Step-Specific Styles (Terms & Contact) */
+.terms-container {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Keyframe for smooth appearance */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0px); }
+}
+
+/* 5. Button Styles */
+.button {
+  display: block; /* Full width on mobile */
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.button--primary {
+  background: linear-gradient(45deg, #5e35b1, #1e88e5);
+  color: white;
+  margin-top: 1rem;
 }
 
 .button--whatsapp {
-  background-color: var(--whatsapp-green);
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  background-color: #25D366;
+  color: white;
 }
 
-.button--whatsapp:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+/* 6. Step-Specific Styles (Key Verification) */
+.key-check-container {
+  animation: fadeIn 0.5s ease;
 }
 
-.whatsapp-icon {
-  width: 24px;
-  height: 24px;
+.challenge-number {
+  display: inline-block;
+  background-color: #5e35b1;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  font-weight: 700;
 }
 
-/* --- Responsividad --- */
-@media (max-width: 768px) {
-  .payment-container {
-    padding: 1rem;
-  }
+.key-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.key-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  text-align: center;
+  background-color: #f4f6f8;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.key-input:focus {
+  outline: none;
+  border-color: #5e35b1;
+  box-shadow: 0 0 0 3px rgba(94, 53, 177, 0.15);
+}
+
+.error-message {
+  margin-top: 1rem;
+  color: #e53935; /* Error color */
+  font-weight: 500;
+  background-color: rgba(229, 57, 53, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* For tablets and larger screens (from 600px) */
+@media (min-width: 600px) {
   .payment-card {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 3rem;
   }
-  .header-title {
-    font-size: 2rem;
+
+  .button {
+    width: auto; /* Allow buttons to size to their content */
+    display: inline-block;
+    padding: 14px 30px;
   }
-  .payment-instruction {
-    font-size: 1rem;
+
+  .terms-container {
+    /* Stack buttons with space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .key-form {
+    /* Place input and button side-by-side */
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .key-input {
+    flex-grow: 1; /* Allow input to take available space */
+  }
+
+  .key-form .button {
+    flex-shrink: 0; /* Prevent button from shrinking */
   }
 }
