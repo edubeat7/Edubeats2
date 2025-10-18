@@ -66,8 +66,8 @@ function UpdatePassword() {
       <header className="header">
         <Navbar />
       </header>
-      <div className="update-password-container">
-        <form onSubmit={handleUpdatePassword} className="update-password-form">
+      <div className="signup-card">
+        <form onSubmit={handleUpdatePassword} className="signup-card">
           <div className="logo-container">
             <img src={logoA} className="App-logo" alt="logo" />
           </div>
@@ -78,7 +78,7 @@ function UpdatePassword() {
               Por favor, introduce tu nueva contraseña a continuación.
             </p>
             
-            <div className="input-group">
+            <div className="signup-card">
               <label className="input-label">
                 <span>Nueva Contraseña:</span>
                 <input
@@ -90,7 +90,7 @@ function UpdatePassword() {
                   placeholder="Introduce tu nueva contraseña"
                 />
               </label>
-              <label className="input-label" style={{marginTop: '1rem'}}>
+              <label className="signup-card" style={{marginTop: '1rem'}}>
                 <span>Confirmar Contraseña:</span>
                 <input
                   type="password"

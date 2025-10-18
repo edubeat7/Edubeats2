@@ -56,7 +56,7 @@ function Login() {
             <h4 className="login-title">Acceso a la Plataforma</h4>
             <h5 className="login-disclaimer">Contenido multimedia para aprender con música</h5>
             
-            <div className="input-group">
+            <div className="login-card">
               <label className="input-label">
                 <span>Correo Electrónico:</span>
                 <input
@@ -78,12 +78,13 @@ function Login() {
                   required
                 />
               </label>
+              
             </div>
 
             {error && <div className="login-error">{error}</div>}
             {success && <div className="login-success">{success}</div>}
 
-            <button className="upload-button login-button" type="submit" disabled={isLoading}>
+            <button className="boton login-button " type="submit" disabled={isLoading}>
               {isLoading ? 'Procesando...' : 'Acceder'}
             </button>
 

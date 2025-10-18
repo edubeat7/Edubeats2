@@ -44,9 +44,10 @@ function Landing() {
                 <h3>📱 Multiplataforma</h3>
                 <p>Disponible en cualquier dispositivo, cuando y donde lo necesites</p>
               </div>
+
+               <a href="/Login" className="boton login-button" style={{ maxWidth: '200px', margin: '2rem auto' }} >Comenzar Ahora</a>
             </div>
 
-            <a href="/Login" className="upload-button login-button" style={{ maxWidth: '200px', margin: '2rem auto' }} >Comenzar Ahora</a>
           </div>
         </div>
       </div>

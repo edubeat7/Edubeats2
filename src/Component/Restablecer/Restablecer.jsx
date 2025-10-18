@@ -59,7 +59,7 @@ function ForgotPassword() {
               Ingresa tu correo electrónico para recibir un enlace y restablecer tu contraseña.
             </p>
             
-            <div className="input-group">
+            <div className="signup-card">
               <label className="input-label">
                 <span>Correo Electrónico:</span>
                 <input

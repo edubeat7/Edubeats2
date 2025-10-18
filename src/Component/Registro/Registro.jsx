@@ -59,7 +59,7 @@ function SignUp() {
             <h4 className="signup-title">Registro en la Plataforma</h4>
             <h5 className="signup-disclaimer">Contenido multimedia para aprender con música</h5>
             
-            <div className="input-group">
+            <div className="signup-card">
               <label className="input-label">
                 <span>Correo Electrónico:</span>
                 <input
