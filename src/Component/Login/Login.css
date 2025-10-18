@@ -1,150 +1,250 @@
-/* --- Login.css (Mobile-First & Responsive) --- */
+/* === Variables Globales (Consistentes con Home.css) === */
+:root {
+  --primary-color: #4a148c;  /* Morado oscuro (Edubeats) */
+  --primary-color-light: #7c4dff;
+  --background-color: #f5f5f5;  /* Gris muy claro */
+  --card-background: #ffffff;   /* Blanco puro */
+  --text-color: #333333;
+  --text-light: #666666;
+  --error-color: #d32f2f;      /* Rojo para errores */
+  --success-color: #388e3c;    /* Verde para éxito */
+  --border-radius: 8px;
+ 
+  --transition-speed: 0.3s ease;
+}
 
-/* 1. Contenedor principal y Layout */
-.login-container {
+/* === Reseteo Básico y Estilos del Body === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* === Contenedor Principal === */
+.container.login-container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra el contenido verticalmente */
   align-items: center;
-  min-height: 100vh;
-  padding: 1rem;
-  box-sizing: border-box;
+  justify-content: center;
+  min-height: calc(100vh - 60px); /* Descontamos el navbar si existe */
+  padding: 1.5rem;
+  width: 100%;
 }
 
+/* === Formulario Wrapper === */
 .login-form {
   width: 100%;
-  max-width: 420px; /* Ancho ideal para formularios en móvil */
-  text-align: center;
+  max-width: 420px; /* Más estrecho, es un formulario de login */
+  margin-block: 2rem;
 }
 
-/* 2. Logo */
+/* === Logo === */
 .logo-container {
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 .App-logo {
-  height: 90px;
-  animation: logo-float 6s ease-in-out infinite;
+  height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
-@keyframes logo-float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-
-/* 3. Tarjeta de Login */
+/* === Tarjeta de Login === */
 .login-card {
-  background-color: #ffffff;
-  padding: 2rem 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  width: 100%;
 }
 
+/* === Títulos y Texto === */
 .login-title {
-  font-size: clamp(1.8rem, 5vw, 2rem); /* Tipografía fluida */
-  color: #5e35b1; /* Color primario */
+  font-size: 1.75rem; /* Ligeramente más pequeño que el H1 de Home */
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
   margin-bottom: 0.5rem;
-  font-weight: 600;
 }
 
 .login-disclaimer {
-  color: #616161; /* Texto sutil */
-  margin-bottom: 2.5rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
-/* 4. Campos de Texto y Etiquetas */
+.login-disclaimer a {
+  color: var(--primary-color-light);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+.login-disclaimer a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* === Grupo de Inputs === */
 .input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem; /* Espacio entre correo y contraseña */
   margin-bottom: 1.5rem;
 }
 
 .input-label {
-  position: relative;
-  text-align: left;
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+}
+
+.input-label span {
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 .login-input {
+  display: block;
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
+  padding: 0.75rem;
   font-size: 1rem;
-  background-color: #f4f6f8;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .login-input:focus {
   outline: none;
-  border-color: #5e35b1;
-  box-shadow: 0 0 0 3px rgba(94, 53, 177, 0.15);
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
 }
 
-/* 5. Botón de Envío y Mensajes de Error */
-.login-button {
-  width: 100%;
-  padding: 14px 20px;
-  border-radius: 12px;
-  background: linear-gradient(45deg, #5e35b1, #1e88e5);
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.login-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 25px rgba(94, 53, 177, 0.25);
+/* === Mensajes de Error / Éxito === */
+.login-error,
+.login-success {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
 }
 
 .login-error {
-  background-color: rgba(229, 57, 53, 0.1);
-  color: #e53935;
-  padding: 12px;
-  border-radius: 12px;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+  background-color: #ffebf0;
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
 }
 
-/* 6. Enlaces Adicionales */
-.extra-links {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column; /* Apilados en móvil */
-  align-items: center;
-  gap: 0.75rem;
+.login-success {
+  background-color: #e8f5e9;
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
 }
 
-.extra-links a {
-  color: #5e35b1;
-  font-weight: 500;
+/* === Botones (Estilo base reutilizable) === */
+.upload-button {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.2s ease;
+  cursor: pointer;
+  padding: 0.85rem 1.5rem; /* Ligeramente más alto */
+  border: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition-speed);
+  
+  background-color: var(--primary-color);
+  color: #ffffff;
 }
 
-.extra-links a:hover {
-  text-decoration: underline;
-  color: #1e88e5;
+.upload-button:hover,
+.upload-button:focus {
+  background-color: #311b92;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  outline: none;
 }
 
-/* --- Media Queries para Responsividad --- */
+.upload-button:active {
+  transform: translateY(0);
+}
 
-/* Para tablets y pantallas más grandes (a partir de 600px) */
-@media (min-width: 600px) {
-  .login-card {
-    padding: 2.5rem;
+.upload-button:disabled {
+  background-color: #b0bec5; /* Gris cuando está deshabilitado */
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botón de Login */
+.login-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+/* === Estilos del Header (para Navbar) === */
+.header {
+  width: 100%;
+  background-color: var(--card-background);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* === Media Queries === */
+
+/* Móviles */
+@media (max-width: 480px) {
+  .container.login-container {
+    padding: 1rem;
+    min-height: calc(100vh - 50px);
   }
 
-  /* Coloca los enlaces uno al lado del otro */
-  .extra-links {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 0.5rem;
+  .login-form {
+    max-width: 100%;
+    margin-block: 1rem;
+  }
+
+  .login-card {
+    padding: 1.5rem;
+  }
+
+  .App-logo {
+    height: 60px;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-disclaimer {
+    font-size: 0.9rem;
+  }
+
+  .upload-button {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .header {
+    height: 50px;
   }
 }

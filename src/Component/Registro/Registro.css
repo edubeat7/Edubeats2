@@ -1,156 +1,271 @@
-/* --- Registro.css (Mobile-First & Responsive) --- */
+/* === Variables Globales (Consistentes con Login.css) === */
+:root {
+  --primary-color: #4a148c;  /* Morado oscuro (Edubeats) */
+  --primary-color-light: #7c4dff;
+  --background-color: #f4f7f6;  /* Gris muy claro */
+  --card-background: #ffffff;   /* Blanco puro */
+  --text-color: #333333;
+  --text-light: #666666;
+  --error-color: #d32f2f;      /* Rojo para errores */
+  --success-color: #388e3c;    /* Verde para éxito */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --transition-speed: 0.3s ease;
+  --navbar-height: 60px;
+}
 
-/* 1. Main Container & Layout */
-.signup-container {
+/* === Reseteo Básico y Estilos del Body === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* === Header (para Navbar) === */
+.header {
+  width: 100%;
+  background-color: var(--card-background);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  position: fixed; /* Fijo en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* === Contenedor Principal === */
+/* Estilo para <div className="container signup-container"> */
+.container.signup-container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically centers the content */
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  padding: 1rem;
-  padding-top: 5rem; /* Provides space for a fixed navbar */
-  box-sizing: border-box;
+  padding: 1.5rem;
+  width: 100%;
+  /* Espacio para el Navbar fijo */
+  padding-top: calc(var(--navbar-height) + 20px); 
 }
 
+/* === Formulario Wrapper === */
 .signup-form {
   width: 100%;
-  max-width: 450px; /* An ideal width for a form on most screens */
-  text-align: center;
+  max-width: 420px; /* Ancho estándar para formularios */
+  margin-block: 1rem;
 }
 
-/* 2. Logo Styling */
+/* === Logo === */
 .logo-container {
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 .App-logo {
-  height: 90px;
-  /* A subtle floating animation for a modern feel */
-  animation: logo-float 6s ease-in-out infinite;
+  height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
-@keyframes logo-float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-
-/* 3. Registration Card */
+/* === Tarjeta de Registro === */
 .signup-card {
-  background-color: #ffffff;
-  padding: 2rem 1.5rem;
-  border-radius: 16px; /* Soft, modern corners */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-out;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  width: 100%;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* 4. Typography */
+/* === Títulos y Texto === */
 .signup-title {
-  font-size: clamp(1.8rem, 5vw, 2rem); /* Responsive font size */
-  color: #5e35b1; /* Primary color */
-  font-weight: 600;
+  font-size: 1.75rem; 
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
   margin-bottom: 0.5rem;
 }
 
 .signup-disclaimer {
-  color: #616161; /* Softer text color for subtitles */
-  margin-bottom: 2.5rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
-/* 5. Input Fields & Labels */
+.signup-disclaimer a {
+  color: var(--primary-color-light);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+.signup-disclaimer a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Texto de "Ya tienes cuenta?" */
+.signup-card .signup-disclaimer:last-of-type {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+/* === Grupo de Inputs === */
 .input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem; /* Space between form fields */
   margin-bottom: 1.5rem;
 }
 
 .input-label {
-  text-align: left;
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Espacio entre labels */
+.input-label + .input-label {
+  margin-top: 1rem;
 }
 
 .input-label span {
   display: block;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: #212121;
+  margin-bottom: 0.25rem;
 }
 
 .signup-input {
+  display: block;
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
+  padding: 0.75rem;
   font-size: 1rem;
-  background-color: #f4f6f8;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .signup-input:focus {
   outline: none;
-  border-color: #5e35b1;
-  box-shadow: 0 0 0 3px rgba(94, 53, 177, 0.15); /* Focus ring for accessibility */
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
 }
 
-/* 6. Feedback Messages (Error/Success) */
-.signup-error, .signup-success {
-  padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+/* === Mensajes de Error / Éxito === */
+.signup-error,
+.signup-success {
   text-align: center;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
 }
 
 .signup-error {
-  background-color: rgba(229, 57, 53, 0.1);
-  color: #e53935; /* Red for errors */
+  background-color: #ffebf0;
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
 }
 
 .signup-success {
-  background-color: rgba(67, 160, 71, 0.1);
-  color: #43a047; /* Green for success */
+  background-color: #e8f5e9;
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
 }
 
-/* 7. Buttons & Links */
-.signup-button {
-  width: 100%;
-  padding: 14px 20px;
-  border-radius: 12px;
-  background: linear-gradient(45deg, #5e35b1, #1e88e5);
-  color: white;
-  font-size: 1.1rem;
+/* === Botones (Estilo base reutilizable) === */
+.upload-button {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
   font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.signup-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 25px rgba(94, 53, 177, 0.25);
-}
-
-.signup-disclaimer a {
-  color: #5e35b1;
-  font-weight: 600;
+  text-align: center;
   text-decoration: none;
+  cursor: pointer;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition-speed);
+  
+  background-color: var(--primary-color);
+  color: #ffffff;
 }
 
-.signup-disclaimer a:hover {
-  text-decoration: underline;
+.upload-button:hover,
+.upload-button:focus {
+  background-color: #311b92;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  outline: none;
 }
 
-/* --- Media Queries for Responsiveness --- */
+.upload-button:active {
+  transform: translateY(0);
+}
 
-/* For tablets and larger screens (from 600px) */
-@media (min-width: 600px) {
+.upload-button:disabled {
+  background-color: #b0bec5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botón de Registro */
+.signup-button {
+  display: block;
+  width: 100%;
+}
+
+/* === Media Queries === */
+
+/* Móviles */
+@media (max-width: 480px) {
+  :root {
+     --navbar-height: 50px; /* Match mobile navbar */
+  }
+
+  .container.signup-container {
+    padding: 1rem;
+    padding-top: calc(var(--navbar-height) + 20px);
+  }
+
+  .signup-form {
+    max-width: 100%;
+    margin-block: 0.5rem;
+  }
+
   .signup-card {
-    padding: 2.5rem; /* More whitespace on larger screens */
+    padding: 1.5rem;
+  }
+
+  .App-logo {
+    height: 60px;
+  }
+
+  .signup-title {
+    font-size: 1.5rem;
+  }
+
+  .signup-disclaimer {
+    font-size: 0.9rem;
+  }
+
+  .upload-button {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .header {
+    height: var(--navbar-height);
   }
 }

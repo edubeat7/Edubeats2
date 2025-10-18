@@ -1,12 +1,14 @@
-// Archivo: /Component/Pago1/Pago1.jsx (Solución con Location State)
-
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'; // ✅ Paso 1: Importa useHistory
+// import { useHistory } from 'react-router-dom'; // ⛔ Se elimina useHistory
+import { useAccess } from '../Context/AccessContext2'; 
 import './Pago1.css';
 import Navbar from '../Navbar/Navbar';
 
 const Pago1 = () => {
-  const history = useHistory(); // ✅ Paso 2: Inicializa el hook
+  // const history = useHistory(); // ⛔ Se elimina la instancia
+  const { grantAccess } = useAccess(); 
+
+  // ... (el resto de tus estados 'step', 'inputValue', etc. se quedan igual) ...
   const [step, setStep] = useState(1);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
@@ -16,23 +18,21 @@ const Pago1 = () => {
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * validKeys.length);
-    setChallenge({
-      number: randomIndex + 1,
-      key: validKeys[randomIndex],
-    });
-  }, []);
+    setChallenge({ number: randomIndex + 1, key: validKeys[randomIndex] });
+  }, []); 
 
+  // Manejador para verificar la clave
   const handleKeyCheck = (e) => {
     e.preventDefault();
     if (inputValue.toLowerCase().trim() === challenge.key) {
       setError('');
       
-      // ✅ Paso 3: Redirige usando history.push y pasa el estado
-      // Esto navega a /Registro y le adjunta un "permiso" secreto.
-      history.push({
-        pathname: '/Registro',
-        state: { fromPayment: true }
-      });
+      // ¡ACCIÓN CLAVE! Llama a la función del contexto para otorgar el permiso
+      grantAccess();
+      
+      // ✅ CAMBIO APLICADO: Se usa window.location.href
+      // Esto recargará la página y te llevará a /Registro
+      window.location.href = '/Registro';
 
     } else {
       setError('Clave incorrecta. Inténtalo de nuevo.');
@@ -40,6 +40,7 @@ const Pago1 = () => {
     }
   };
 
+  // ... (Tu función contactAdminOnWhatsApp se queda igual) ...
   const contactAdminOnWhatsApp = () => {
     const phoneNumber = '+584126779652';
     const message = encodeURIComponent("Hola, estoy interesado en los términos de pago y el servicio.");
@@ -48,12 +49,11 @@ const Pago1 = () => {
 
   return (
     <div className="container">
-      <header className="header">
-        <Navbar />
-      </header>
+      <header className="header"><Navbar /></header>
       <div className="payment-container">
         <div className="payment-card">
           {step === 1 ? (
+            // --- PASO 1: TÉRMINOS Y CONTACTO ---
             <div className="terms-container">
               <h1 className="header-title">Información de Pago</h1>
               <p className="payment-instruction">
@@ -61,6 +61,9 @@ const Pago1 = () => {
               </p>
               <p className="payment-instruction">
                 El costo del servicio es de <strong>5$</strong> o su equivalente en Bolívares a la tasa BCV del día.
+              </p>
+              <p className="payment-instruction">
+                Para aclarar dudas o realizar el pago, por favor contáctanos a través de WhatsApp.
               </p>
               <button onClick={contactAdminOnWhatsApp} className="button button--whatsapp">
                 Contactar por WhatsApp
@@ -70,6 +73,7 @@ const Pago1 = () => {
               </button>
             </div>
           ) : (
+            // --- PASO 2: VERIFICACIÓN DE CLAVE ---
             <div className="key-check-container">
               <h1 className="header-title">Verificación de Acceso</h1>
               <p className="payment-instruction">

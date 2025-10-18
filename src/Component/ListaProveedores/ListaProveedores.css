@@ -1,539 +1,386 @@
-/* Estilos para el componente ListaProveedores */
+/* === Variables Globales (Consistentes) === */
+:root {
+  --primary-color: #4a148c;  /* Morado oscuro (Edubeats) */
+  --primary-color-light: #7c4dff;
+  --background-color: #7c4dff;  /* Gris muy claro */
+  --card-background: #ffffff;   /* Blanco puro */
+  --text-color: #333333;
+  --text-light: #666666;
+  --border-color: #e0e0e0;
+  --border-radius: 8px;
+  
+  --transition-speed: 0.3s ease;
+  --navbar-height: 60px;
+}
+
+/* === Reseteo Básico (Asumiendo que no hay un CSS global) === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    margin: 0;
-    font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* === Contenedor Principal (Centrado) === */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 1.5rem;
+  padding-top: calc(var(--navbar-height) + 20px); 
+}
+
+/* === Header (Estilizado en Navbar.css) === */
+.header {
+  z-index: 1000;
+}
+
+/* === Contenedor de Proveedores (Tarjeta Principal) === */
+.proveedores-container {
+  width: 100%;
+  max-width: 1100px; /* Más ancho para la tabla */
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-wrapper {
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.main-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.welcome-message {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+/* === Sección de Controles y Filtros === */
+.controls-section {
+  margin-bottom: 1.5rem;
+}
+
+.search-filters {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los filtros bajen en móvil */
+  gap: 1rem;
+}
+
+.search-input,
+.category-select {
+  flex-grow: 1; /* Ocupan espacio disponible */
+  flex-basis: 200px; /* Base mínima */
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.search-input:focus,
+.category-select:focus {
+  outline: none;
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
+}
+
+/* === Botón Base (Reutilizable) === */
+.upload-button {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition-speed);
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+.upload-button:hover {
+  background-color: #311b92;
+}
+
+/* Botón de limpiar filtros (estilo secundario) */
+.clear-filter-button {
+  background-color: var(--text-light);
+  flex-basis: 150px; /* Base fija */
+  flex-grow: 0;
+}
+.clear-filter-button:hover {
+  background-color: var(--text-color);
+}
+
+/* === Aviso de Scroll (Móvil) === */
+.scroll-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  display: none; /* Oculto por defecto, visible por JS/Media Query */
+}
+
+/* === Wrapper de la Tabla (para scroll horizontal) === */
+.proveedores-table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal EN ESCRITORIO si es necesario */
+}
+
+.results-count {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+}
+
+/* === Tabla === */
+.proveedores-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px; /* Evita que la tabla se comprima demasiado */
+}
+
+/* Encabezado de la Tabla */
+.table-header {
+  background-color: var(--background-color);
+  display: table-header-group;
+}
+
+.header-cell {
+  display: table-cell;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+/* Cuerpo de la Tabla */
+.table-body {
+  display: table-row-group;
+}
+
+.table-row {
+  display: table-row;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color var(--transition-speed);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row:hover {
+  background-color: #fcfaff; /* Morado muy muy claro */
+}
+
+.table-cell {
+  display: table-cell;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  vertical-align: middle;
+}
+
+/* Celda de Empresa (más prominente) */
+.empresa-cell {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Badge de Categoría (Rubro) */
+.category-badge {
+  display: inline-block;
+  background-color: #ede7f6; /* Morado pálido */
+  color: var(--primary-color);
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.email-link {
+  color: var(--primary-color-light);
+  text-decoration: none;
+  font-weight: 500;
+}
+.email-link:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
+
+/* === Estados de Carga, Error y Sin Resultados === */
+.loading-container, .error-container, .no-results {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-container p, .no-results p {
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.retry-button {
+  background-color: var(--primary-color-light);
+}
+
+/* === Media Queries para Responsividad (Tabla Colapsable) === */
+
+/* Tablets y Móviles (Aquí ocurre la magia) */
+@media (max-width: 800px) {
+  
+  /* Ocultar el aviso de scroll de escritorio */
+  .scroll-hint {
+    display: none;
+  }
+
+  /* Desactivar scroll horizontal, la tabla se colapsará */
+  .proveedores-table-wrapper {
+    overflow-x: hidden;
+  }
+
+  /* Ocultar el encabezado tradicional */
+  .table-header {
+    display: none;
   }
   
-  .container {
+  .proveedores-table, .table-body, .table-row, .table-cell {
+    display: block; /* Convertir todo a bloques */
     width: 100%;
-    height: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+  }
+
+  .proveedores-table {
+    min-width: 0; /* Resetear ancho mínimo */
+  }
+
+  /* Cada fila se convierte en una "tarjeta" */
+  .table-row {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  .table-row:hover {
+    background-color: transparent; /* Quitar hover de fila */
   }
   
-  .proveedores-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Encabezado */
-  .header-wrapper {
-    margin-bottom: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 20px;
-  }
-  
-  .header-content {
-    width: 100%;
-  }
-  
-  .main-title {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 0;
-  }
-  
-  .welcome-message {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0 0 10px 0;
-  }
-  
-  /* Controles de carga y búsqueda */
-  .controls-section {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
+  .table-cell {
+    display: flex; /* Usar flex para alinear etiqueta y dato */
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    padding: 0.75rem;
+    border-bottom: 1px dashed #eee;
+    text-align: right; /* Alinear el dato a la derecha */
   }
-  
-  .file-upload-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
+  .table-cell:last-child {
+    border-bottom: none;
   }
-  
-  .file-name {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(0, 0, 0, 0.2);
-    padding: 5px 10px;
-    border-radius: 5px;
+
+  /* Usar el 'data-label' para mostrar el encabezado */
+  .table-cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: left;
+    margin-right: 1rem;
   }
-  
-  .search-filters {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    justify-content: flex-end;
-  }
-  
-  .search-box {
-    flex-grow: 1;
-    max-width: 400px;
-  }
-  
-  .search-input {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 25px;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 1rem;
-  }
-  
-  .search-input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Estilos mejorados para el selector de categoría */
-  .category-select {
-    padding: 12px 15px;
-    border-radius: 25px;
-    border: none;
-    background: rgba(0, 0, 0, 0.7); /* Fondo más oscuro para mejor contraste */
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    min-width: 200px;
-    appearance: none; /* Eliminar apariencia predeterminada */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 15px;
-    padding-right: 40px;
-  }
-  
-  .category-select:focus {
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
-  }
-  
-  /* Estilos para las opciones del select */
-  .category-select option {
-    background-color: #2c1954; /* Color de fondo oscuro para las opciones */
-    color: white;
-    padding: 10px;
-  }
-  
-  /* Indicación de scroll horizontal */
-  .scroll-hint {
-    text-align: center;
-    margin-bottom: 10px;
-    color: rgba(255, 255, 255, 0.7);
-    font-style: italic;
-    animation: pulse 1.5s infinite ease-in-out;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
-  }
-  
-  /* Botones */
-  .upload-button {
-    background: #fff;
-    color: #4B0082;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline-block;
-    transition: all 0.3s;
-    border: none;
-    outline: none;
-    text-align: center;
-  }
-  
-  .upload-button:hover {
-    background: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .clear-filter-button {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-  }
-  
-  .clear-filter-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
-  
-  .logout-button {
-    background: rgba(255, 255, 255, 0.9);
-    color: #dc3545;
-    border: 2px solid #dc3545;
-    transition: all 0.3s ease;
-  }
-  
-  .logout-button:hover {
-    background: #dc3545;
-    color: white;
-    transform: translateY(-2px);
-  }
-  
-  .retry-button {
-    background: rgba(255, 255, 255, 0.7);
-    color: #4B0082;
-  }
-  
-  /* Tabla de proveedores mejorada */
-  .proveedores-table-wrapper {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    padding: 20px;
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .results-count {
-    margin-bottom: 15px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-  }
-  
-  .proveedores-table {
-    width: 100%;
-    border-radius: 8px;
-    overflow-x: auto; /* Añadir scroll horizontal cuando sea necesario */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    display: block; /* Cambiado a block para permitir scroll */
-  }
-  
-  .table-header {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1fr 2fr;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px 20px;
-    font-weight: bold;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 900px; /* Ancho mínimo para asegurar legibilidad */
-  }
-  
-  .table-row {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1fr 2fr;
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(255, 255, 255, 0.05);
-    transition: background 0.2s;
-    min-width: 900px; /* Ancho mínimo para asegurar legibilidad */
-  }
-  
-  .table-row:nth-child(odd) {
-    background: rgba(255, 255, 255, 0.02);
-  }
-  
-  .table-row:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-  
-  /* Asegurar que las celdas tengan espacio suficiente pero no desborden */
-  .table-cell {
-    padding: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal; /* Permitir que el texto haga wrap */
-    word-break: break-word; /* Romper palabras si es necesario */
-    min-width: 0; /* Permitir que la celda se encoja si es necesario */
-  }
-  
-  /* Aumentar el alto de la tabla para mostrar más registros */
-  .table-body {
-    max-height: 70vh; /* Usar altura relativa a la ventana */
-    overflow-y: auto;
-  }
-  
-  .empresa-cell {
-    font-weight: bold;
-    color: #fff;
-  }
-  
-  .address-cell {
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.8);
-  }
-  
-  /* Estilos para el texto de teléfono y email (no clicables) */
-  .phone-text, .email-text {
-    color: rgba(255, 255, 255, 0.9);
+
+  /* Ajustes finos para móvil */
+  .email-link {
+    /* Evitar que enlaces largos rompan el layout */
+    word-break: break-all;
   }
   
   .category-badge {
-    background: rgba(159, 140, 252, 0.2);
-    color: #9f8cfc;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.8em;
-    display: inline-block;
+    justify-self: flex-end; /* Alinear badge a la derecha */
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  :root {
+    --navbar-height: 50px;
   }
   
-  /* Mensajes de estado */
-  .no-results {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
+  .container {
+    padding: 1rem;
+    padding-top: calc(var(--navbar-height) + 20px);
   }
   
-  .no-results p {
-    margin-bottom: 15px;
-    color: rgba(255, 255, 255, 0.7);
+  .proveedores-container {
+    padding: 1rem;
   }
   
-  .loading-container {
-    display: flex;
+  .header-wrapper {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .main-title {
+    font-size: 1.5rem;
+  }
+
+  .welcome-message {
+    font-size: 0.95rem;
+  }
+  
+  /* Forzar botones de filtro a ocupar ancho completo */
+  .search-filters {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    text-align: center;
+    gap: 0.75rem;
+  }
+  .search-input, .category-select, .clear-filter-button {
+    flex-basis: auto;
+    width: 100%;
   }
   
-  .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-bottom: 20px;
+  .table-cell {
+    padding: 0.5rem;
   }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-  
-  .error-container {
-    background: rgba(220, 53, 69, 0.2);
-    padding: 20px;
-    border-radius: 10px;
-    border-left: 5px solid #dc3545;
-    margin-bottom: 20px;
-  }
-  
-  .card2 {
-    width: auto;
-    height: auto;
-    padding: 20px;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  /* Mejoras responsive */
-  @media (max-width: 1024px) {
-    .table-header, .table-row {
-      grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1fr 1.5fr;
-      min-width: 800px;
-    }
-  }
-  
-  @media (max-width: 992px) {
-    .controls-section {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    
-    .file-upload-wrapper, .search-filters {
-      width: 100%;
-    }
-    
-    .search-box, .category-filter {
-      max-width: 100%;
-      width: 100%;
-    }
-    
-    .search-filters {
-      flex-direction: column;
-    }
-    
-    .category-select {
-      min-width: 100%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    body {
-      padding: 20px 10px;
-    }
-    
-    .main-title {
-      font-size: 28px;
-    }
-    
-    /* Mantener el formato de tarjetas para móviles */
-    .proveedores-table {
-      overflow-x: visible; /* No necesitamos scroll horizontal en vista de tarjetas */
-    }
-    
-    .table-header {
-      display: none; /* Ocultar cabecera en vista móvil */
-    }
-    
-    .table-body {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-height: none; /* No limitar altura en vista de tarjetas */
-    }
-    
-    .table-row {
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 15px;
-      min-width: unset; /* Eliminar ancho mínimo en vista móvil */
-      width: 100%;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    .table-cell {
-      padding: 12px 15px;
-      position: relative;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      white-space: normal;
-    }
-    
-    /* Agregar etiquetas para identificar cada campo */
-    .table-cell::before {
-      content: attr(data-label);
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 0.7em;
-      color: rgba(255, 255, 255, 0.6);
-      display: block;
-      margin-bottom: 5px;
-    }
-    
-    /* Estilo específico para la primera celda (empresa) */
-    .empresa-cell {
-      background: rgba(0, 0, 0, 0.2);
-      font-size: 1.1em;
-      padding: 15px;
-    }
-    
-    /* Estilo para la última celda (dirección) */
-    .address-cell {
-      border-bottom: none;
-      font-size: 0.9em;
-      padding-bottom: 15px;
-    }
-    
-    /* Ajustes para la visualización en móvil */
-    .upload-button {
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 10px;
-    }
-    
-    .file-name {
-      width: 100%;
-      text-align: center;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    body {
-      padding: 10px;
-    }
-    
-    .main-title {
-      font-size: 24px;
-    }
-    
-    .header-wrapper {
-      padding: 15px;
-    }
-    
-    .controls-section, .proveedores-table-wrapper {
-      padding: 15px;
-    }
-    
-    .welcome-message {
-      font-size: 16px;
-    }
-    
-    .search-input, .category-select {
-      padding: 12px;
-      font-size: 14px;
-    }
-    
-    .table-cell {
-      padding: 10px;
-      font-size: 15px;
-    }
-    
-    .category-badge {
-      font-size: 0.75em;
-      padding: 3px 6px;
-    }
-  }
-  
-  /* Estilos de impresión */
-  @media print {
-    body {
-      background: white;
-      color: black;
-      padding: 0;
-    }
-    
-    .container {
-      max-width: 100%;
-    }
-    
-    .header, 
-    .controls-section,
-    .card2,
-    .no-results button {
-      display: none !important;
-    }
-    
-    .proveedores-table-wrapper {
-      background: none;
-      padding: 0;
-    }
-    
-    .table-header {
-      background: #f0f0f0;
-      color: black;
-      display: grid;
-    }
-    
-    .table-row {
-      background: white !important;
-      color: black;
-      border-bottom: 1px solid #ddd;
-      display: grid;
-    }
-    
-    .category-badge {
-      background: #f0f0f0;
-      color: #333;
-    }
-    
-    a {
-      text-decoration: none !important;
-      color: black;
-    }
-  }
+}

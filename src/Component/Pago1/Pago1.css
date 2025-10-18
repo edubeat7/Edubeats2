@@ -1,171 +1,235 @@
-/* --- Pago1.css (Mobile-First & Responsive) --- */
+/* === Variables Globales (Consistentes) === */
+:root {
+  --primary-color: #4a148c;  /* Morado oscuro (Edubeats) */
+  --primary-color-light: #7c4dff;
+  --background-color: #f4f7f6;  /* Gris muy claro */
+  --card-background: #ffffff;   /* Blanco puro */
+  --text-color: #333333;
+  --text-light: #666666;
+  --error-color: #d32f2f;
+  --whatsapp-color: #25D366;  /* Color específico de WhatsApp */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --transition-speed: 0.3s ease;
+  --navbar-height: 60px;
+}
 
-/* 1. Main Container & Layout */
-.payment-container {
+/* === Reseteo Básico (Asumiendo que no hay un CSS global) === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* === Contenedor Principal (Centrado) === */
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center the card vertically */
   align-items: center;
-  min-height: 100vh;
-  padding: 1rem;
-  padding-top: 5rem; /* Space for the fixed Navbar */
-  box-sizing: border-box;
-}
-
-/* 2. The Main Card */
-.payment-card {
-  background-color: #ffffff;
+  justify-content: center; /* Centra la tarjeta */
   width: 100%;
-  max-width: 550px; /* A good width for informational content */
-  padding: 2rem 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  /* Smooth transition between steps */
-  transition: all 0.3s ease-in-out;
+  min-height: 100vh;
+  padding: 1.5rem;
+  padding-top: calc(var(--navbar-height) + 20px); 
 }
 
-/* 3. Shared Content Styles */
+/* === Header (Estilizado en Navbar.css) === */
+.header {
+  z-index: 1000;
+}
+
+/* === Contenedor del Pago === */
+.payment-container {
+  width: 100%;
+  max-width: 600px; /* Ancho ideal para texto */
+  margin-block: 1rem;
+}
+
+/* === Tarjeta de Pago === */
+.payment-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Contenedores de Pasos (Step 1 y Step 2) */
+.terms-container, 
+.key-check-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .header-title {
-  font-size: clamp(1.8rem, 5vw, 2rem); /* Fluid typography */
-  color: #5e35b1; /* Primary color */
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
   margin-bottom: 1.5rem;
 }
 
 .payment-instruction {
-  color: #616161; /* Subtle text color */
-  line-height: 1.7;
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.payment-instruction:last-of-type {
+  margin-bottom: 2rem; /* Más espacio antes de los botones */
 }
 
 .payment-instruction strong {
-  color: #212121; /* Darker text for emphasis */
-}
-
-/* 4. Step-Specific Styles (Terms & Contact) */
-.terms-container {
-  animation: fadeIn 0.5s ease;
-}
-
-/* Keyframe for smooth appearance */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0px); }
-}
-
-/* 5. Button Styles */
-.button {
-  display: block; /* Full width on mobile */
-  width: 100%;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  color: var(--text-color);
   font-weight: 600;
-  cursor: pointer;
+}
+
+/* === Estilo Base de Botones (Definido en el JSX) === */
+.button {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition-speed);
+  width: 100%;
+  margin-top: 0.75rem; /* Espacio entre botones */
 }
 
-.button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+.button:hover, 
+.button:focus {
+  opacity: 0.85;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  outline: none;
 }
 
+.button:active {
+  transform: translateY(0);
+}
+
+/* Botón Primario */
 .button--primary {
-  background: linear-gradient(45deg, #5e35b1, #1e88e5);
-  color: white;
-  margin-top: 1rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+.button--primary:hover {
+  background-color: #311b92;
+  opacity: 1;
 }
 
+/* Botón de WhatsApp */
 .button--whatsapp {
-  background-color: #25D366;
-  color: white;
+  background-color: var(--whatsapp-color);
+  color: #ffffff;
+}
+.button--whatsapp:hover {
+  background-color: #1EBE56; /* Un poco más oscuro */
+  opacity: 1;
 }
 
-/* 6. Step-Specific Styles (Key Verification) */
-.key-check-container {
-  animation: fadeIn 0.5s ease;
+/* --- PASO 2: Verificación de Clave --- */
+
+.key-check-container .payment-instruction {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .challenge-number {
   display: inline-block;
-  background-color: #5e35b1;
-  color: white;
+  background-color: #ede7f6; /* Morado pálido */
+  color: var(--primary-color);
   padding: 0.25rem 0.75rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   font-size: 1.2rem;
-  margin-left: 0.5rem;
   font-weight: 700;
+  margin-inline: 0.25rem;
+  vertical-align: middle;
 }
 
 .key-form {
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
 .key-input {
+  display: block;
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  margin-bottom: 1rem;
   text-align: center;
-  background-color: #f4f6f8;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .key-input:focus {
   outline: none;
-  border-color: #5e35b1;
-  box-shadow: 0 0 0 3px rgba(94, 53, 177, 0.15);
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
 }
 
 .error-message {
-  margin-top: 1rem;
-  color: #e53935; /* Error color */
-  font-weight: 500;
-  background-color: rgba(229, 57, 53, 0.1);
+  text-align: center;
+  font-size: 0.9rem;
   padding: 0.75rem;
-  border-radius: 8px;
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  background-color: #ffebf0; /* Rosa pálido */
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
 }
 
-/* --- Media Queries for Responsiveness --- */
+/* === Media Queries === */
 
-/* For tablets and larger screens (from 600px) */
-@media (min-width: 600px) {
+/* Tablets */
+@media (max-width: 768px) {
+  .payment-container {
+    max-width: 95%;
+  }
   .payment-card {
-    padding: 2.5rem 3rem;
+    padding: 1.5rem;
   }
+}
 
+/* Móviles */
+@media (max-width: 480px) {
+  :root {
+    --navbar-height: 50px;
+  }
+  .container {
+    padding: 1rem;
+    padding-top: calc(var(--navbar-height) + 20px);
+  }
+  .payment-card {
+    padding: 1.25rem;
+  }
+  .header-title {
+    font-size: 1.5rem;
+  }
+  .payment-instruction {
+    font-size: 0.95rem;
+  }
   .button {
-    width: auto; /* Allow buttons to size to their content */
-    display: inline-block;
-    padding: 14px 30px;
-  }
-
-  .terms-container {
-    /* Stack buttons with space */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .key-form {
-    /* Place input and button side-by-side */
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .key-input {
-    flex-grow: 1; /* Allow input to take available space */
-  }
-
-  .key-form .button {
-    flex-shrink: 0; /* Prevent button from shrinking */
+    font-size: 0.95rem;
+    padding: 0.8rem 1.2rem;
   }
 }

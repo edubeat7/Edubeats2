@@ -1,8 +1,11 @@
-import './App.css'
+import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// Tus componentes de página
+// ✅ 1. ASEGÚRATE DE QUE LA RUTA A TU ARCHIVO DE CONTEXTO SEA CORRECTA
+import { AccessProvider } from './Component/Context/AccessContext2'; // Ajusta si el nombre del archivo o carpeta es diferente
+
+// Componentes de página
 import Home from "./Component/Home/Home";
 import Login from "./Component/Login/Login";
 import Registro from "./Component/Registro/Registro";
@@ -15,72 +18,54 @@ import PruebaAutomatica from "./Component/PruebaAutomatica/PruebaAutomatica";
 import PaginaAudio from "./Component/PaginaAudio/PaginaAudio";
 import ListaProveedores from "./Component/ListaProveedores/ListaProveedores";
 
-import PaymentRoute from './Component/PaymentRoute'; // Asegúrate que la ruta sea correcta
-
-// ¡Paso 1: Importa el componente ProtectedRoute!
-// (Asegúrate de que la ruta al archivo sea la correcta en tu proyecto)
-import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute'; // Ajusta esta ruta si es necesario
+// Componentes Guardianes
+import PaymentRoute from './Component/PaymentRoute/PaymentRoute';
+import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
-    <div className="container">
-      <Router>
-        <Switch>
-          {/* --- RUTAS PÚBLICAS (Cualquiera puede acceder) --- */}
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/Home">
-            <Home />
-          </Route>
-          <Route exact path="/Login">
-            <Login />
-          </Route>
-          <Route exact path="/Registro">
-            <Registro />
-          </Route>
-          <Route exact path="/Pago1">
-            <Pago1 />
-          </Route>
-          <Route exact path="/Restablecer">
-            <Restablecer />
-          </Route>
-          <Route exact path="/UpdatePassword">
-            <UpdatePassword />
-          </Route>
-          
-
-          <Route exact path="/Registro">
-            <PaymentRoute>
-              <Registro />
-            </PaymentRoute>
-          </Route>
-          {/* --- RUTAS PROTEGIDAS (Requieren inicio de sesión) --- */}
-          {/* Paso 2: Envuelve cada componente protegido con <ProtectedRoute> */}
-          <Route exact path="/MenuPaginas">
-            <ProtectedRoute>
-              <MenuPaginas />
-            </ProtectedRoute>
-          </Route>
-          <Route exact path="/Administrador">
-            <ProtectedRoute>
-              <Administrador />
-            </ProtectedRoute>
-          </Route>
-          <Route exact path="/PruebaAutomatica">
-            <ProtectedRoute>
-              <PruebaAutomatica />
-            </ProtectedRoute>
-          </Route>
-          <Route exact path="/PaginaAudio">
-          <PaginaAudio />
-        </Route>
-        <Route exact path="/ListaProveedores">
-          <ListaProveedores />
-        </Route>
-        </Switch>
-      </Router>
-    </div>
+    // ✅ 2. ENVUELVE TODA LA APLICACIÓN CON EL ACCESSPROVIDER AQUÍ
+    // Ahora, todos los componentes, incluyendo Pago1, tendrán acceso al contexto.
+    <AccessProvider>
+      <div className="container">
+        <Router>
+          <Switch>
+            {/* --- RUTAS PÚBLICAS (Cualquiera puede acceder) --- */}
+            <Route exact path="/" component={Home} />
+            <Route exact path="/Home" component={Home} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/Pago1" component={Pago1} />
+            <Route exact path="/Restablecer" component={Restablecer} />
+            <Route exact path="/UpdatePassword" component={UpdatePassword} />
+            
+            {/* --- RUTA DE REGISTRO PROTEGIDA POR PAGO --- */}
+            {/* ✅ 3. ESTA ES LA ÚNICA RUTA PARA /Registro Y ESTÁ PROTEGIDA */}
+            <Route exact path="/Registro">
+              <PaymentRoute>
+                <Registro />
+              </PaymentRoute>
+            </Route>
+            
+            {/* --- RUTAS PROTEGIDAS (Requieren inicio de sesión) --- */}
+            <Route exact path="/MenuPaginas">
+              <ProtectedRoute> <MenuPaginas /> </ProtectedRoute>
+            </Route>
+            <Route exact path="/Administrador">
+              <ProtectedRoute> <Administrador /> </ProtectedRoute>
+            </Route>
+            <Route exact path="/PruebaAutomatica">
+              <ProtectedRoute> <PruebaAutomatica /> </ProtectedRoute>
+            </Route>
+            <Route exact path="/PaginaAudio">
+               <ProtectedRoute> <PaginaAudio /> </ProtectedRoute>
+            </Route>
+            <Route exact path="/ListaProveedores">
+               <ProtectedRoute> <ListaProveedores /> </ProtectedRoute>
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    </AccessProvider>
   );
 }
 

@@ -1,129 +1,237 @@
-/* --- Home.css (Mobile-First & Responsive) --- */
+/* === Variables Globales para consistencia profesional === */
+:root {
+  --primary-color: #4a148c;  /* Un morado oscuro (Edubeats) */
+  --primary-color-light: #7c4dff; /* Un acento más brillante */
+  --background-color: #f5f5f5;  /* Un gris muy claro para el fondo */
+  --card-background: #ffffff;   /* Blanco puro para las tarjetas */
+  --text-color: #333333;       /* Texto principal oscuro */
+  --text-light: #666666;      /* Texto secundario/descripciones */
+  --border-radius: 8px;
 
-/* 1. Contenedor Principal y Layout */
-.login-container {
+  --transition-speed: 0.3s ease;
+}
+
+/* === Reseteo Básico y Estilos del Body === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* === Contenedor Principal (Compartido con Login) === */
+.container.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Espacio para el Navbar y en la parte inferior */
-  padding: 6rem 1rem 3rem 1rem;
-  width: 100%;
+  justify-content: center;
   min-height: 100vh;
-  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+  padding: 1.5rem; /* Padding pequeño para bordes en móvil */
+  width: 100%;
 }
 
-/* 2. Logo */
+/* === Formulario/Wrapper (Compartido con Login) === */
+.login-form {
+  width: 100%;
+  max-width: 900px; /* Más ancho para la landing page */
+  margin-block: 2rem; /* Margen vertical pequeño */
+}
+
+/* === Logo (Compartido con Login) === */
 .logo-container {
-  margin-bottom: 2rem;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem; /* Margen pequeño */
 }
 
 .App-logo {
-  height: 100px;
-  max-width: 100%;
-  /* Animación sutil para un toque dinámico */
-  animation: logo-float 6s ease-in-out infinite;
+  height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
-/* Animación para el logo */
-@keyframes logo-float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-/* 3. Tarjeta Principal de Contenido */
+/* === Tarjeta Principal (Compartida con Login) === */
 .login-card {
-  background: #ffffff;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem; /* Padding interno moderado */
   width: 100%;
-  max-width: 500px; /* Ancho máximo en móviles */
-  padding: 2rem 1.5rem;
-  border-radius: 16px; /* Bordes más redondeados y modernos */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 
+/* === Títulos y Texto (Compartido con Login) === */
 .login-title {
-  font-size: clamp(1.8rem, 5vw, 2.2rem); /* Tipografía fluida que se adapta */
-  color: #5e35b1; /* Color primario */
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
   margin-bottom: 0.75rem;
 }
 
 .login-disclaimer {
-  color: #616161; /* Texto sutil */
-  margin-bottom: 2.5rem;
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  font-size: 1rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-inline: auto; /* Centrar disclaimer */
+}
+
+/* === Contenido Específico de Home.jsx === */
+.landing-content {
+  width: 100%;
+}
+
+.landing-content .login-disclaimer {
+  font-size: 1.1rem;
   line-height: 1.6;
 }
 
-/* 4. Grilla de Características (Features) */
+/* === Grid de Características (Responsivo) === */
 .features-grid {
-  display: flex;
-  flex-direction: column; /* Apilado en móviles para fácil lectura */
-  gap: 1rem;
-  text-align: left;
+  display: grid;
+  /* En pantallas grandes, se ajusta automáticamente.
+    Crea columnas de mínimo 250px y máximo 1fr.
+  */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .feature-item {
-  background-color: #f4f6f8; /* Fondo ligeramente diferente */
+  background-color:#e0e0e0; /* Fondo ligeramente gris */
   padding: 1.25rem;
-  border-radius: 12px;
-  border-left: 4px solid #1e88e5; /* Color secundario como acento */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color-light);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .feature-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .feature-item h3 {
-  font-size: 1.1rem;
-  color: #5e35b1;
-  margin-bottom: 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
 }
 
 .feature-item p {
   font-size: 0.9rem;
-  color: #616161;
-  line-height: 1.5;
+  color: var(--text-light);
+  line-height: 1.6;
 }
 
-/* 5. Botón de Acción Principal */
+/* === Botones (Estilo base reutilizable) === */
+.upload-button {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem; /* Padding moderado */
+  border: none;
+  border-radius: var(--border-radius);
+  transition: var(--transition-speed);
+  
+  /* Estilo primario por defecto */
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.upload-button:hover,
+.upload-button:focus {
+  background-color: #311b92; /* Un poco más oscuro al pasar el ratón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.upload-button:active {
+  transform: translateY(0);
+}
+
+/* Botón específico de Login/Home */
 .login-button {
-  display: inline-block; /* Permite centrar con margin auto */
+  display: block; /* Para que 'margin: auto' funcione */
   width: 100%;
   max-width: 250px;
-  padding: 14px 20px;
-  border-radius: 12px;
-  background: linear-gradient(45deg, #5e35b1, #1e88e5);
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-decoration: none;
-  margin: 2.5rem auto 0 auto;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto 0; /* Centrado con margen superior */
 }
 
-.login-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 25px rgba(94, 53, 177, 0.25);
-}
+/* === Media Queries para Responsividad === */
 
-/* --- Media Queries para Responsividad --- */
+/* Tablets y móviles grandes */
+@media (max-width: 768px) {
+  .login-form {
+    max-width: 95%; /* Ocupa casi todo el ancho */
+    margin-block: 1rem;
+  }
 
-/* Para tablets (a partir de 768px) */
-@media (min-width: 768px) {
   .login-card {
-    max-width: 900px;
-    padding: 3rem;
+    padding: 1.5rem; /* Padding reducido en tablet */
+  }
+
+  .login-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .container.login-container {
+    padding: 1rem; /* Padding mínimo en móvil */
+  }
+
+  .login-card {
+    padding: 1.25rem;
+  }
+
+  .App-logo {
+    height: 60px; /* Logo más pequeño */
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-disclaimer {
+    font-size: 0.9rem;
+  }
+
+  .landing-content .login-disclaimer {
+    font-size: 1rem;
   }
 
   .features-grid {
-    display: grid;
-    /* Dos columnas con tamaño mínimo de 250px */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    /* En móvil, forzamos una sola columna en lugar de auto-fit.
+      Esto previene que dos items queden lado a lado si caben (ej. 250px + 250px).
+    */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .feature-item {
+    padding: 1rem;
+  }
+
+  .upload-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .login-button {
+    max-width: 100%; /* Botón ocupa todo el ancho */
   }
 }
