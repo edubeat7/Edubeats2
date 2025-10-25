@@ -14,6 +14,7 @@ import Pago1 from "./Component/Pago1/Pago1";
 import Restablecer from "./Component/Restablecer/Restablecer";
 import UpdatePassword from "./Component/Restablecer/UpdatePassword";
 import Administrador from "./Component/Administrador/Administrador";
+import GeneradorPrueba from "./Component/PruebaAutomatica/GeneradorPrueba";
 import PruebaAutomatica from "./Component/PruebaAutomatica/PruebaAutomatica";
 import PaginaAudio from "./Component/PaginaAudio/PaginaAudio";
 import ListaProveedores from "./Component/ListaProveedores/ListaProveedores";
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/Login" component={Login} />
             <Route exact path="/Pago1" component={Pago1} />
             <Route exact path="/Restablecer" component={Restablecer} />
+            <Route exact path="/GeneradorPrueba" component={GeneradorPrueba} />
             <Route exact path="/UpdatePassword" component={UpdatePassword} />
             
             {/* --- RUTA DE REGISTRO PROTEGIDA POR PAGO --- */}

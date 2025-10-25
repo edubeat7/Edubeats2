@@ -4,307 +4,437 @@ import * as XLSX from 'xlsx';
 const ExcelGenerator = () => {
   // Usamos las preguntas que ya conocemos del código previo
   const preguntas = [
-    {
-      texto: "1. ¿Cuál es la principal diferencia entre tendones y ligamentos en el cuerpo humano?",
-      opciones: [
-        "a) Los tendones no son elásticos",
-        "b) Los tendones unen músculo con hueso mientras que los ligamentos unen hueso con hueso",
-        "c) Los tendones se encuentran principalmente en las extremidades superiores",
-        "d) Los ligamentos están compuestos principalmente por elastina"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "2. En la biomecánica del músculo, ¿qué determina la fuerza máxima que puede generar un músculo?",
-      opciones: [
-        "a) La longitud de las fibras musculares",
-        "b) El ángulo de penación",
-        "c) El área de sección transversal fisiológica",
-        "d) La velocidad de contracción"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "3. Una paciente de 68 años con osteoporosis posmenopáusica avanzada presenta una disminución significativa de la densidad mineral ósea en su fémur proximal. Las imágenes de densitometría ósea muestran que la sección transversal efectiva del cuello femoral ha disminuido a un tercio de su valor normal debido a la pérdida de masa ósea. Si esta paciente aplica la misma fuerza sobre la cadera al caminar que una persona con densidad ósea normal, el esfuerzo aplicado en el área debilitada será:",
-      opciones: [
-        "a) El triple",
-        "b) Un tercio",
-        "c) No cambia",
-        "d) El doble"
-      ],
-      respuestaCorrecta: 0,
-    },
-    {
-      texto: "4. ¿Qué tipo de esfuerzo soportan peor los huesos?",
-      opciones: [
-        "a) Compresión",
-        "b) Tensión",
-        "c) Torsión",
-        "d) Flexión"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "5. Un paciente con esguince en el tendón muestra una deformación permanente del tejido ¿En qué región de la curva esfuerzo-deformación se encuentra esta lesión?",
-      opciones: [
-        "a) Región basal",
-        "b) Región lineal o elástica",
-        "c) Región de falla progresiva o plástica",
-        "d) Punto de falla total"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "6. En un músculo peniforme con ángulo de penación de 30° (medido desde la vertical), ¿qué porcentaje de la fuerza muscular contribuye directamente a la fuerza de contracción?",
-      opciones: [
-        "a) 100%",
-        "b) 87%",
-        "c) 56%",
-        "d) 34%"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "7. La propiedad del hueso que hace que su comportamiento mecánico varíe según la dirección de la carga aplicada se denomina:",
-      opciones: [
-        "a) Viscoelasticidad",
-        "b) Anisotropía",
-        "c) Ductilidad",
-        "d) Porosidad"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "8. Durante un procedimiento de lavado gástrico, se introduce una sonda nasogástrica a través de la fosa nasal del paciente. La distancia desde la fosa nasal hasta el estómago es de aproximadamente 80 cm. ¿En qué segmento del trayecto de la sonda nasogástrica la velocidad de avance debe ser más lenta debido a riesgos anatómicos o cambios de dirección y cuál es su velocidad media de todo el trayecto si tarda 16 s?",
-      opciones: [
-        "a) En la cavidad nasal, debido a la curvatura y estrechez del meato nasal inferior, V=16cm/s",
-        "b) En la transición de la faringe a la hipofaringe, donde existe riesgo de introducción en la vía aérea V=5cm/s",
-        "c) En el esófago cervical, debido a la compresión natural por el cartílago cricoides V=2cm/s",
-        "d) En la unión gastroesofágica (cardias), donde existe un esfínter y un cambio de dirección V=8cm/s"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "9. Un neurólogo está evaluando a pacientes con diferentes grados de esclerosis múltiple, una enfermedad desmielinizante que afecta la conducción nerviosa. Realiza pruebas de conducción nerviosa en cuatro pacientes, midiendo el tiempo que tarda un potencial de acción en recorrer una distancia de 30 cm en nervios periféricos. Los resultados son los siguientes: Paciente A: 0,6 ms, Paciente B: 1,5 ms, Paciente C: 3,0 ms, Paciente D: 0,3 ms. ¿Qué paciente presenta probablemente un menor daño desmielinizante en la zona evaluada?",
-      opciones: [
-        "a) Paciente A",
-        "b) Paciente B",
-        "c) Paciente C",
-        "d) Paciente D"
-      ],
-      respuestaCorrecta: 3,
-    },
-    {
-      texto: "10. Un odontólogo está evaluando la resistencia de diferentes materiales para una restauración molar en un paciente con bruxismo severo. Durante la masticación, el molar soporta una fuerza oclusal máxima de 720 N. La restauración propuesta tiene una superficie oclusal con área de contacto de 24 mm². El odontólogo considera tres materiales diferentes con los siguientes límites de resistencia a la compresión: • Material A (Composite reforzado): 280 MPa • Material B (Cerámica feldespática): 160 MPa • Material C (Resina acrílica): 95 MPa. ¿Qué material es más susceptible a fracturarse bajo las condiciones de carga máxima del paciente con bruxismo?",
-      opciones: [
-        "a) Material A",
-        "b) Material B",
-        "c) Material C",
-        "d) Todos los materiales resistirán la carga sin fracturarse"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "11. El freno de alambre que se ve en la figura tiene una tensión T igual a 7N a lo largo de él con un ángulo de 70 grados con el eje y. La fuerza resultante en el eje y es de:",
-      opciones: [
-        "A) 8,3",
-        "b) 4,8",
-        "c) 5,6",
-        "d) 7,4"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "12. Un fisioterapeuta está desarrollando un programa de rehabilitación para un paciente con una lesión de ligamento cruzado anterior (LCA) en etapa inicial de recuperación. En esta fase, el fisioterapeuta necesita fortalecer la musculatura sin generar tensión en el ligamento lesionado, por lo que decide incluir ejercicios isométricos. ¿Qué combinación de ejercicios sería más adecuada para esta fase de rehabilitación?",
-      opciones: [
-        "a) Extensiones de rodilla y sentadillas profundas",
-        "b) Sentadillas con salto y escalones",
-        "c) Contracción sin flexo extensión del cuádriceps y ejercicio de puente glúteo estático",
-        "d) Zancadas dinámicas y ejercicios con banda elástica con movimiento"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "13. Un ingeniero biomédico evalúa diferentes materiales y consideraciones biomecánicas para el diseño de una prótesis de codo. El paciente es un hombre de 58 años con artritis reumatoide avanzada que requiere una artroplastia total. ¿Cuál de las siguientes opciones describe correctamente los materiales más adecuados para una prótesis de codo moderna, los criterios de selección y las fuerzas biomecánicas relevantes?",
-      opciones: [
-        "a) Material: Polietileno de ultra alto peso molecular, Criterio principal: biocompatibilidad, Fuerzas predominantes: compresión en el pasador articular",
-        "b) Material: Aleación de titanio para el componente humeral y polietileno para la superficie articular, Criterio principal: resistencia a la fatiga, Fuerzas predominantes: cizallamiento en los anclajes",
-        "c) Material: Aleación de titanio para componentes estructurales y polietileno de ultra alto peso molecular para superficies articulares, Criterios principales: biocompatibilidad y resistencia mecánica, Fuerzas predominantes: flexión y torsión en el pasador, tensión y compresión en los vástagos",
-        "d) Material: Acero inoxidable 316L, Criterio principal: bajo costo, Fuerzas predominantes: torsión en el componente humeral"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "14. Un odontólogo realiza la exodoncia de un molar inferior utilizando un elevador dental recto. El elevador actúa como una palanca de primer género donde el punto de apoyo (fulcro) se encuentra en el hueso alveolar. La distancia desde el punto de aplicación de la fuerza en el mango del elevador hasta el fulcro es de 12 cm, mientras que la distancia desde el fulcro hasta el punto de resistencia en el diente es de 0.8 cm. Si el odontólogo aplica una fuerza de 45 N en el mango del elevador, ¿cuál es la fuerza resultante aplicada sobre el diente para lograr su luxación?",
-      opciones: [
-        "A) 3 N",
-        "B) 432 N",
-        "C) 540 N",
-        "D) 675 N"
-      ],
-      respuestaCorrecta: 3,
-    },
-    {
-      texto: "15. Un paciente llega a urgencias tras caer de un andamio en una obra. Presenta una fractura por compresión en la tibia. Para corroborar su versión sobre la altura de la caída, el médico forense realiza un análisis biomecánico. ¿Desde qué altura aproximada cayó el paciente?",
-      opciones: [
-        "A) 5,25 m (equivalente a ~1,75 pisos)",
-        "B) 10,50 m (equivalente a ~3,5 pisos)",
-        "C) 15,76 m (equivalente a ~5,25 pisos)",
-        "D) 20,00 m (equivalente a ~6,67 pisos)"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "16. Un astronauta realiza un experimento para evaluar la atrofia muscular durante su misión de 3 meses (12 semanas) en la Estación Espacial Internacional (EEI). Tras 12 semanas en el espacio, responde: ¿Cuál es la fuerza máxima que el astronauta podrá generar con el deltoides al regresar a la Tierra?",
-      opciones: [
-        "A) 15,00 N",
-        "B) 19,28 N",
-        "C) 24,57 N",
-        "D) 30,00 N"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "17. ¿Cuál es la principal diferencia entre músculo estriado y músculo liso en el cuerpo humano?",
-      opciones: [
-        "a) El músculo estriado es de movimiento voluntario",
-        "b) El músculo liso es de movimiento voluntario",
-        "c) El músculo liso es el que compone al corazón",
-        "d) Uno tiene fibras más largas que el otro"
-      ],
-      respuestaCorrecta: 0,
-    },
-    {
-      texto: "18. ¿Cuál de estos elementos no es un biomaterial?",
-      opciones: [
-        "a) Válvula cardiaca de cochino",
-        "b) Titanio",
-        "c) Acero",
-        "d) Catgut"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "19. Una paciente de 68 años con osteoporosis posmenopáusica avanzada presenta una disminución significativa de la densidad mineral ósea en su fémur proximal. Si esta paciente aplica la misma fuerza sobre la cadera al caminar que una persona con densidad ósea normal, el esfuerzo aplicado en el área debilitada será:",
-      opciones: [
-        "a) El triple",
-        "b) Un tercio",
-        "c) El cuádruple",
-        "d) El doble"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "20. ¿Qué tipo de esfuerzo soportan más los dientes?",
-      opciones: [
-        "a) Compresión",
-        "b) Tensión",
-        "c) Torsión",
-        "d) Flexión"
-      ],
-      respuestaCorrecta: 0,
-    },
-    {
-      texto: "21. ¿Qué tipo de lesión pertenece a un esguince?",
-      opciones: [
-        "a) Rotura del ligamento",
-        "b) Desprendimiento del ligamento con el hueso",
-        "c) Estiramiento “permanente” del tendón",
-        "d) Desprendimiento del ligamento del musculo"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "22. En un músculo peniforme con ángulo de penación de 40° medido desde la vertical, ¿qué porcentaje de la fuerza muscular contribuye directamente a la fuerza de contracción?",
-      opciones: [
-        "a) 100%",
-        "b) 77%",
-        "c) 72%",
-        "d) 64%"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "23. La propiedad del hueso que hace que su comportamiento mecánico varíe según la velocidad de la carga aplicada se denomina:",
-      opciones: [
-        "a) Viscoelasticidad",
-        "b) Anisotropía",
-        "c) Ductilidad",
-        "d) Porosidad"
-      ],
-      respuestaCorrecta: 0,
-    },
-    {
-      texto: "24. Un odontólogo está evaluando la resistencia de diferentes materiales para una restauración molar en un paciente con bruxismo severo. ¿Qué material se puede colocar para el esfuerzo que ejerce el paciente?",
-      opciones: [
-        "a) Material A",
-        "b) Material B",
-        "c) Material C",
-        "d) Todos los materiales resistirán la carga sin fracturarse"
-      ],
-      respuestaCorrecta: 3,
-    },
-    {
-      texto: "25. La figura muestra la forma del tendón de cuádriceps al pasar por la rótula. Si la tensión T del tendón es 1400 N donde tiene un angulo de 37° medido de izquierda a derecha desde la horizontal en sentido horario y otro ángulo de 80° medido de izquierda a derecha en sentido antihorario ¿cuál es el módulo y la dirección de la fuerza de contacto FC ejercida por el fémur sobre la rótula?",
-      opciones: [
-        "A) 1300",
-        "b) 1420",
-        "c) 1596",
-        "d) 1600"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "26. Un fisioterapeuta está diseñando un programa de rehabilitación para un paciente en fase inicial de recuperación de una lesión del manguito rotador. ¿Qué combinación de ejercicios sería la más adecuada para esta fase?",
-      opciones: [
-        "A) Press militar con mancuernas y elevaciones laterales con peso",
-        "B) Rotaciones externas e internas con banda elástica a 0° de abducción",
-        "C) Dominadas y fondos en paralelas",
-        "D) Lanzamientos medicinales y ejercicios pliométricos"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "27. Un paciente llega a consulta tras la colocación de un fijador externo ortopédico. Respecto a los materiales y cargas mecánicas involucradas, seleccione la afirmación CORRECTA:",
-      opciones: [
-        "a) El componente interno debe ser de acero común por su bajo costo. Los tornillos soportan principalmente compresión pura",
-        "b) Los tornillos de fijación ósea deben ser de titanio por su biocompatibilidad e integración ósea. Los puntos de anclaje presentan esfuerzos de tensión",
-        "c) La estructura externa puede ser de aluminio para reducir peso. La estructura externa está sometida a flexión y torsión",
-        "d) Todos los componentes deben ser pulidos para evitar alergias. No existen momentos torsionales en el sistema"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "28. Un odontólogo realiza la exodoncia de un molar inferior utilizando un elevador dental recto que actúa como palanca de primer género. ¿Cuál es la fuerza resultante sobre el diente para lograr su luxación?",
-      opciones: [
-        "a) 500 N",
-        "b) 750 N",
-        "c) 857 N",
-        "d) 950 N"
-      ],
-      respuestaCorrecta: 2,
-    },
-    {
-      texto: "29. Un paciente llega a urgencias tras caer de un andamio en una obra. ¿Desde qué altura aproximada cayó el paciente?",
-      opciones: [
-        "A) 5,25 m (equivalente a ~1,75 pisos)",
-        "B) 4,39 m (equivalente a ~1,31 pisos)",
-        "C) 15,76 m (equivalente a ~5,25 pisos)",
-        "D) 3,00 m (equivalente a ~1 pisos)"
-      ],
-      respuestaCorrecta: 1,
-    },
-    {
-      texto: "30. Un deportista en recuperación de una lesión ha mejorado del 60% al 70% de su capacidad muscular en 2 meses. ¿Cuál es la situación ACTUAL correcta?",
-      opciones: [
-        "a) Genera 12.3 N de fuerza, pesa 800 N, y se recomienda reposo absoluto",
-        "b) Produce 17.2 N de fuerza, pesa 700 N, y necesita ejercicio progresivo + suplementos",
-        "c) Desarrolla 24.6 N de fuerza, pesa 750 N, y debe hacer entrenamiento de alto impacto",
-        "d) Mantiene 15.0 N de fuerza, pesa 70 N, y requiere solo estiramientos"
-      ],
-      respuestaCorrecta: 1,
-    }
-  ];
+  {
+    texto: "1. ¿Cuál de los siguientes pares de elementos pueden contribuir a formar un puente de hidrógeno?",
+    opciones: [
+      "a. S y Pb",
+      "b. Cl y C",
+      "c. Br y  C",
+      "d. N y O"
+    ],
+    respuestaCorrecta: 3,
+  },
+  {
+    texto: "2. ¿Cuál de las siguientes afirmaciones es correcta respecto a la presión osmótica?",
+    opciones: [
+      "a. Disminuye al aumentar la osmolaridad de una solución",
+      "b. Es mayor en soluciones hipotónicas",
+      "c. Es mayor en soluciones hipertónicas",
+      "d. No depende de la concentración de soluto"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "3. ¿Qué sucede si se añaden 0,3 g de NaCl a un litro de agua?",
+    opciones: [
+      "a. El sodio se solvata con el agua por enlaces covalentes",
+      "b. El sodio y el cloro se solvatan por la baja constante dieléctrica del agua",
+      "c. El sodio y el cloro se separan al máximo, por la elevada constante dieléctrica del agua",
+      "d. La solvatación del sodio y del cloro disminuyen, por la elevada constante dieléctrica del agua"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "10. ¿Cuál de las siguientes afirmaciones sobre la estructura y función del colágeno es INCORRECTA?",
+    opciones: [
+      "a. La glicina es el aminoácido más abundante, apareciendo cada tres residuos en la cadena polipeptídica del colágeno.",
+      "b. La hidroxilación de prolina en el colágeno es fundamental para la estabilidad de la triple hélice.",
+      "c. La vitamina C es esencial para la síntesis adecuada del colágeno.",
+      "d. La formación de enlaces iónicos entre moléculas de colágeno aumenta la resistencia mecánica del tejido."
+    ],
+    respuestaCorrecta: 3,
+  },
+  {
+    texto: "11. ¿Cuál es el principal tipo de enlace estabiliza la estructura secundaria en las proteínas? (0,5pts)",
+    opciones: [
+      "a. Enlaces iónicos",
+      "b. Enlaces peptídicos",
+      "c. Puentes de hidrógeno",
+      "d. Enlaces covalentes sulfurados"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "12. ¿A qué se refiere la estructura terciaria de una proteína?",
+    opciones: [
+      "a. La cadena lineal de aminoácidos",
+      "b. El plegamiento tridimensional completo de una sola cadena polipeptídica",
+      "c. La asociación de varias cadenas polipeptídicas",
+      "d. La presencia de hélices alfa o láminas beta"
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "13. ¿Cuál de las siguientes descripciones es la más precisa sobre la estructura y función general del colágeno?",
+    opciones: [
+      "a. Es una proteína globular que actúa principalmente como enzima en reacciones metabólicas.",
+      "b. Todos los tipos de colágeno se encuentran exclusivamente en el ligamento periodontal, sin presencia en otros tejidos del cuerpo.",
+      "c. Su principal función es almacenar energía en forma de grasa, similar a los triglicéridos.",
+      "d. El colágeno se compone de una triple hélice formada por tres cadenas de polipéptidos, ricas en aminoácidos como glicina, prolina e hidroxiprolina."
+    ],
+    respuestaCorrecta: 3,
+  },
+  {
+    texto: "14. Considerando exclusivamente los eventos bioquímicos que ocurren dentro del glóbulo rojo, ¿cuál es el proceso fundamental que explica la alteración morfológica de los eritrocitos y sus consecuencias clínicas en la anemia drepanocítica?",
+    opciones: [
+      "a. Los glóbulos rojos afectados desarrollan receptores de superficie anómalos que atraen y se unen a plaquetas en exceso, formando microtrombos espontáneamente en la circulación.",
+      "b. Se caracteriza por una activación de las enzimas antioxidantes en los eritrocitos, e induce un estrés oxidativo severo y la destrucción de la membrana celular.",
+      "c. La hemoglobina alterada en esta condición se une al oxígeno con una afinidad excepcionalmente alta, lo que impide su liberación efectiva a los tejidos y causa hipoxia generalizada.",
+      "d. La hemoglobina afectada experimenta una polimerización anormal, formando largas fibras rígidas que distorsionan la forma del eritrocito y reducen su capacidad de deformación."
+    ],
+    respuestaCorrecta: 3,
+  },
+  {
+    texto: "15. Para optimizar la liberación de oxígeno en los tejidos con alta demanda metabólica (como el músculo en ejercicio), la afinidad de la hemoglobina por el oxígeno debe disminuir. ¿Cuál combinación de factores bioquímicos promueve esta disminución de la afinidad?",
+    opciones: [
+      "a. Una disminución en la temperatura corporal y una reducción en la producción de dióxido de carbono.",
+      "b. Una disminución del pH (aumento de H+), un incremento en la presión parcial de CO2 y un aumento en la concentración de 2,3-bisfosfoglicerato (2,3-BPG).",
+      "c. Un aumento en el pH y una disminución en la concentración de 2,3-bisfosfoglicerato (2,3-BPG).",
+      "d. Una alta saturación de oxígeno inicial en los pulmones y la ausencia de iones cloruro en el plasma sanguíneo."
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "16. ¿Cuál es la descripción más precisa del grupo hemo en el contexto de la hemoglobina?",
+    opciones: [
+      "a. Un fragmento de ADN que codifica las instrucciones para la síntesis de la hemoglobina.",
+      "b. Es una cadena polipeptídica rica en aminoácidos hidrofóbicos que se une directamente al oxígeno.",
+      "c. Un complejo orgánico con un anillo de porfirina que contiene un átomo de hierro ferroso (Fe2+) en su centro, esencial para la unión reversible de oxígeno.",
+      "d. Una molécula de glucosa modificada que provee energía a las células sanguíneas."
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "18. ¿Qué caracteriza al centro activo de una enzima?",
+    opciones: [
+      "a. Es anhídrido y se encuentra en la superficie de la enzima",
+      "b. Contiene agua, está formado por el sitio de unión al sustrato y el sitio catalítico",
+      "c. Es anhídrido y se encuentra en un bolsillo hidrofóbico",
+      "d. Contiene residuos Val, Leu y Ala que intervienen en la catálisis ácido básica"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "19. ¿Cuál de las siguientes afirmaciones es correcta respecto a la Nicotinamida Adenina Dinucleótido?",
+    opciones: [
+      "a. Es la principal coenzima de las enzimas hidrolasas",
+      "b. Se encuentra débilmente unida a la enzima y transporta al ión hidruro",
+      "c. Está fuertemente unida a las enzimas oxidoreductasas",
+      "d. Transporta dos hidrógenos y se encuentra débilmente unida a las enzimas"
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "20. ¿Cuál de los siguientes es un mecanismo de acción de las enzimas gingipainas?",
+    opciones: [
+      "a. Hidrolizan el colágeno de la matriz extracelular al incorporar una molécula de agua",
+      "b. Hidrolizan al colágeno de las encías, lo cual requiere de energía",
+      "c. Hidrolizan al colágeno de la matriz extracelular, al extraer una molécula de agua",
+      "d. Las opciones “a” y “b” son correctas"
+    ],
+    respuestaCorrecta: 0,
+  },
+  {
+    texto: "21. ¿Qué se puede afirmar de una enzima que tiene una relación Kcat/KM baja?",
+    opciones: [
+      "a. Puede tener alta afinidad pero un bajo recambio",
+      "b. Tiene alta afinidad y eficacia",
+      "c. Puede ser poco eficaz y afin",
+      "d. Es muy eficaz, tiene alta afinidad por su sustrato y es muy veloz"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "22. ¿Qué significa que una molécula sea un modulador alostérico heterotrópico positivo de una enzima?",
+    opciones: [
+      "a. Que es una molécula ajena a la reacción catalizada por la enzima, que incrementa su actividad al unirse a un sitio diferente al sitio activo de la enzima",
+      "b. Que es una molécula perteneciente a la reacción catalizada por la enzima, que incrementa su actividad al unirse a un sitio diferente al sitio activo de la enzima",
+      "c. Que es una molécula perteneciente a la reacción catalizada por la enzima, que disminuye su actividad al unirse a un sitio diferente al sitio activo de la enzima",
+      "d. Que se une a un sitio alostérico, pero no modifica la actividad de la enzima"
+    ],
+    respuestaCorrecta: 0,
+  },
+  {
+    texto: "23. ¿Qué sucede en la catálisis covalente?",
+    opciones: [
+      "a. En la formación de un enlace covalente con el sustrato que facilita el estado de transición",
+      "b. En un ataque nucleofílico de la enzima que aumenta la energía de transición",
+      "c. En la formación de un enlace covalente entre diferentes partes de una enzima",
+      "d. En un ataque electrofílico que aumenta la energía de activación"
+    ],
+    respuestaCorrecta: 0,
+  },
+  {
+    texto: "16. Dada la reacción bioquímica: A + B → C + D, cuyo valor de ΔG = +23,5 kcal/mol, indique cuál de las siguientes afirmaciones es correcta respecto a dicha reacción:",
+    opciones: [
+      "a. Es una reacción espontánea, exergónica que tiende a la entropía.",
+      "b. Es una reacción no espontánea, exergónica que requiere de ATP.",
+      "c. El contenido energético de C y D es menor que el de A y B. La reacción es espontánea.",
+      "d. Los compuestos A y B tienen menor energía que C y D. La reacción es no espontánea."
+    ],
+    respuestaCorrecta: 3,
+  },
+  {
+    texto: "17. ¿Qué es requerido en el anabolismo?",
+    opciones: [
+      "a. Equivalentes de reducción y ATP.",
+      "b. Coenzimas oxidadas y ATP.",
+      "c. Coenzimas reducidas y AMP.",
+      "d. Acetil CoA y AMP."
+    ],
+    respuestaCorrecta: 0,
+  },
+  {
+    texto: "18. ¿Cuál de las siguientes es una razón por la cual se libera energía para la hidrólisis del ATP?",
+    opciones: [
+      "a. Por la presencia de ribosa.",
+      "b. Porque el magnesio estabiliza sus cargas.",
+      "c. Porque su hidrólisis disminuye la repulsión electrostática entre los átomos de oxígeno.",
+      "d. Por el elevado contenido energético de la adenosina que lo compone."
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "19. ¿Qué tipo de reacción cataliza la enzima Piruvato Deshidrogenasa?",
+    opciones: [
+      "a. Transaminación.",
+      "b. Descarboxilación oxidativa.",
+      "c. Hidrólisis.",
+      "d. Descarboxilación reductora."
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "20. ¿Qué función tiene la lipoamida en la enzima E2 de la Piruvato Deshidrogenasa?",
+    opciones: [
+      "a. Descarboxilación oxidativa del Piruvato.",
+      "b. Transferencia del grupo acetilo a la Coenzima A.",
+      "c. Regeneración de la forma reducida de la enzima.",
+      "d. Regulación de la actividad de la enzima Piruvato Deshidrogenasa."
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "21. ¿Cuál es el efecto del ayuno sobre la enzima Piruvato Deshidrogenasa (PDH)?",
+    opciones: [
+      "a. La elevada relación ADP/ATP provoca fosforilación de la PDH, activándola.",
+      "b. El ATP actúa como modulador alostérico heterotrópico positivo de la PDH.",
+      "c. La baja relación ATP/ADP activa a la PDH por modulación alostérica heterotrópica positiva por parte del ADP.",
+      "d. El ADP inhibe a la PDH."
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "22. ¿De dónde proviene la energía necesaria para la síntesis de Citrato en el Ciclo de Krebs?",
+    opciones: [
+      "a. De la hidrólisis del enlace tioéster del Actil CoA.",
+      "b. De los equivalentes de reducción que van a la cadena de transporte de electrones.",
+      "c. De la hidrólisis del oxaloacetato.",
+      "d. Del ATP de la glucólisis."
+    ],
+    respuestaCorrecta: 0,
+  },
+  {
+    texto: "23. ¿Qué enzima del Ciclo de Krebs cataliza la reacción donde hay fosforilación a nivel de sustrato?",
+    opciones: [
+      "a. Succinato Deshidrogenasa.",
+      "b. Piruvato Deshidrogenasa.",
+      "c. Succinil CoA sintetasa.",
+      "d. ATP/ADP translocasa."
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "24. ¿Cuántas moléculas de alta energía (ATP o GTP) se producen dentro del ciclo de Krebs?",
+    opciones: [
+      "a. 30 o 32 dependiendo del tipo de lanzadera.",
+      "b. 1.",
+      "c. 10.",
+      "d. Ninguna porque todas provienen de la cadena de transporte de electrones."
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "25. ¿Qué efecto tiene el ATP sobre la actividad de la enzima Alfacetoglutarato Deshidrogenasa?",
+    opciones: [
+      "a. La inhibe por modificación covalente reversible.",
+      "b. No tiene ningún efecto.",
+      "c. La inhibe por modulación alostérica.",
+      "d. La activa por modificación covalente reversible."
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "26. Es sabido que la enzima Piruvato Carboxilasa sintetiza oxaloacetato a partir de Piruvato y CO₂. ¿Cómo se clasifica esta reacción teniendo en cuenta su vinculación con el Ciclo de Krebs?",
+    opciones: [
+      "a. Anfibólica.",
+      "b. Anfifílica.",
+      "c. Catabólica.",
+      "d. Anaplerótica."
+    ],
+    respuestaCorrecta: 3,
+  },
+  {
+    texto: "¿Cuál de las siguientes afirmaciones es correcta respecto a la alfa amilasa salival?",
+    opciones: [
+      "Su pH óptimo es de 4",
+      "Hidroliza enlaces glicosídicos alfa 1-4",
+      "Su actividad inicia en la boca y se incrementa en el estómago",
+      "Hidroliza enlaces glicosídicos alfa 1-6"
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "¿En dónde se sintetizan las oligosacaridasas?",
+    opciones: [
+      "En el páncreas",
+      "En las glándulas salivales",
+      "En las vellosidades intestinales",
+      "En el colon ascendente"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Qué caracteriza al transportador sglt1?",
+    opciones: [
+      "Se encuentra en las glándulas salivales",
+      "Tiene km bajo y realiza difusión facilitada",
+      "Realiza transporte activo secundario",
+      "Transporta exclusivamente fructosa"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Qué caracteriza al transportador GLUT 2?",
+    opciones: [
+      "Es dependiente de insulina",
+      "Se encuentra exclusivamente en músculo y adipocito",
+      "Es independiente de insulina",
+      "Está exclusivamente en el hígado y en el músculo"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Cuántas moléculas de ATP se generan en la fase de generación energética de la glicolisis anaerobia?",
+    opciones: [
+      "a) 2",
+      "b) 4",
+      "c) 1",
+      "d) 30 o 32 dependiendo de la lanzadera que se use"
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "¿En cuál de las siguientes reacciones de la glicólisis se da una fosforilación de sustrato?",
+    opciones: [
+      "A. En la reacción catalizada por la glucoquinasa",
+      "B. En la fosforilación de fructosa 6 fosfato",
+      "C. En la reacción catalizada por la piruvato quinasa",
+      "D. En la reacción catalizada por la enolasa"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Qué efecto tiene el citrato sobre la actividad enzimática de la enzima fosfofructoquinasa i?",
+    opciones: [
+      "Actúa como modulador alostérico homotrópico negativo",
+      "Destruye al sitio activo de la enzima",
+      "Actúa como modulador alostérico heterotrópico negativo",
+      "No tiene efecto porque es un intermediario del ciclo de krebs"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Qué efecto tiene la fructosa 2,6 bifosfato sobre la enzima fosfofructoquinasa i?",
+    opciones: [
+      "Actúa como modulador alostérico homotrópico negativo",
+      "Destruye al sitio activo de la enzima",
+      "Actúa como modulador alostérico heterotrópico positivo",
+      "Enlentece a la glicólisis"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Por qué la dextrina es uno de los productos de la digestión de los carbohidratos en la boca?",
+    opciones: [
+      "Porque la alfa amilasa no reconoce a los enlaces glicosídicos alfa 1-4",
+      "Porque el pH de la saliva es ligeramente alcalino",
+      "Porque la alfa amilasa salival no reconoce a los enlaces alfa 1-6",
+      "Porque la lactasa no actúa en la boca"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿qué se necesita para que actúe la alfa amilasa pancreatica?",
+    opciones: [
+      "Un pH ácido propiciado por el bicarbonato",
+      "Que el oligosacárido tenga enlaces alfa 1-6",
+      "Un pH alcalino propiciado por el bicarbonato",
+      "Que el íleon tenga un pH alcalino"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Cuál de los siguientes transportadores de glucosa requiere de una concentración muy elevada de esta molécula para activarse?",
+    opciones: [
+      "GLUT 1",
+      "GLUT 2",
+      "GLUT 3",
+      "GLUT 4"
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "¿Cuál de los siguientes transportadores de glucosa es dependiente de insulina?",
+    opciones: [
+      "GLUT 1",
+      "GLUT 2",
+      "GLUT 3",
+      "GLUT 4"
+    ],
+    respuestaCorrecta: 3,
+  },
+  {
+    texto: "¿Cuál de las siguientes es una característica de la glicólisis en el glóbulo rojo?",
+    opciones: [
+      "a) Es aeróbica, produciendo 30 o 32 ATP",
+      "b) Genera 2,3 bifosfoglicerato en una vía alterna",
+      "c) C. Es anaeróbica por la ausencia de núcleo",
+      "d) Es anaeróbica y produce 30 o 32 ATP"
+    ],
+    respuestaCorrecta: 1,
+  },
+  {
+    texto: "¿Qué caracteriza a la enzima piruvato quinasa de la glicólisis?",
+    opciones: [
+      "A. Cataliza a una reacción donde se da fosforilación a nivel de sustrato",
+      "B. Cataliza a una reacción reversible",
+      "C. Es un monómero",
+      "D. Es activa cuando está fosforilada"
+    ],
+    respuestaCorrecta: 0,
+  },
+  {
+    texto: "¿Qué efecto tiene el ATP sobre la actividad enzimática de la enzima fosfofructoquinasa I?",
+    opciones: [
+      "Actúa como modulador alostérico homotrópico negativo",
+      "Destruye al sitio activo de la enzima",
+      "Actúa como modulador alostérico heterotrópico negativo",
+      "No tiene ningún efecto"
+    ],
+    respuestaCorrecta: 2,
+  },
+  {
+    texto: "¿Cuál o cuáles de las siguientes es una enzima regulable de la glicólisis?",
+    opciones: [
+      "La aldolasa y la fosfofructoquinasa II",
+      "La fosfofructoquinasa I",
+      "La enolasa",
+      "La piruvato quinasa y la enolasa"
+    ],
+    respuestaCorrecta: 1,
+  }
+]
 
   // Función para convertir los datos al formato requerido para Excel
   const convertirDatosParaExcel = (preguntas) => {
