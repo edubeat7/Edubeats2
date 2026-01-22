@@ -1,56 +1,87 @@
 import { Link } from 'react-router-dom';
-import './Home.css'; // Reutilizamos los mismos estilos
+import './Home.css';
 import logoA from '../Login/Audifonoslogo.png';
 
 function Landing() {
   return (
-    <div className="container login-container">
-      <div className="login-form">
-        <div className="logo-container">
-          <img src={logoA} className="App-logo" alt="logo" />
-        </div>
-
-        <div className="login-card">
-          <h1 className="login-title">Bienvenido a Edubeats</h1>
+    <div className="home-page">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <div className="hero-logo">
+            <img src={logoA} className="App-logo" alt="Edubeats logo" />
+          </div>
           
-          <div className="landing-content">
-            <p className="login-disclaimer" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
-              Descubre un nuevo mundo de aprendizaje a través de nuestra plataforma.
-            </p>
+          <h1 className="hero-title">
+            Bienvenido a <span className="gradient-text">Edubeats</span>
+          </h1>
+          
+          <p className="hero-subtitle">
+            Descubre un nuevo mundo de aprendizaje a través de nuestra plataforma educativa con contenido multimedia innovador.
+          </p>
+          
+          <a href="/Login" className="hero-cta">
+            Comenzar Ahora
+            <span className="cta-arrow">→</span>
+          </a>
+        </div>
+      </section>
 
-
-            <div className="features-grid">
-              <div className="feature-item">
-                <h3>🎵 Aprende con audio diseñado para ti</h3>
-                <p>Contenido educativo integrado en experiencias únicas</p>
-              </div>
-
-              <div className="feature-item">
-                <h3>📝 Pruebas Autocorregidas</h3>
-                <p>Banco de ejercicios interactivos con corrección automática y retroalimentación inmediata</p>
-              </div>
-              
-              <div className="feature-item">
-                <h3>👨‍🎓 Link y enlaces de interes</h3>
-                <p>Acceso a una lista de material e información</p>
-              </div>
-              
-              <div className="feature-item">
-                <h3>🎧 Contenido Exclusivo</h3>
-                <p>Contactanos para lecciones especializadas y material multimedia premium</p>
-              </div>
-              
-              <div className="feature-item">
-                <h3>📱 Multiplataforma</h3>
-                <p>Disponible en cualquier dispositivo, cuando y donde lo necesites</p>
-              </div>
-
-               <a href="/Login" className="boton login-button" style={{ maxWidth: '200px', margin: '2rem auto' }} >Comenzar Ahora</a>
+      {/* Features Section */}
+      <section className="features-section">
+        <div className="features-container">
+          <h2 className="section-title">¿Qué ofrecemos?</h2>
+          
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">🎵</div>
+              <h3>Audio Educativo</h3>
+              <p>Contenido diseñado para ti con experiencias de aprendizaje únicas</p>
             </div>
 
+            <div className="feature-card">
+              <div className="feature-icon">📝</div>
+              <h3>Pruebas Interactivas</h3>
+              <p>Ejercicios con corrección automática y retroalimentación inmediata</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">📚</div>
+              <h3>Material de Estudio</h3>
+              <p>Acceso a enlaces y recursos educativos de calidad</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">🎧</div>
+              <h3>Contenido Premium</h3>
+              <p>Lecciones especializadas y material multimedia exclusivo</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">📱</div>
+              <h3>Multiplataforma</h3>
+              <p>Disponible en cualquier dispositivo, cuando lo necesites</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">🚀</div>
+              <h3>Fácil de Usar</h3>
+              <p>Interfaz intuitiva diseñada para una experiencia fluida</p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="cta-section">
+        <div className="cta-content">
+          <h2>¿Listo para comenzar?</h2>
+          <p>Únete a nuestra comunidad de aprendizaje hoy mismo</p>
+          <a href="/Login" className="cta-button">
+            Acceder a la Plataforma
+          </a>
+        </div>
+      </section>
     </div>
   );
 }

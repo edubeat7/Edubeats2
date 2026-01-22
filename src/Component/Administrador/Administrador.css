@@ -1,87 +1,136 @@
-/* --- Variables de Color y Estilos Globales (Paleta Profesional) --- */
-:root {
-  --primary-accent: #5a76f3;
-  --secondary-accent: #5314b8;
-  --bg-dark: #5c39db;
-  --card-bg: rgba(30, 41, 59, 0.5);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --error-color: #ff8a8a;
-  --success-color: #7edda9;
-  --warning-color: #facc15;
-}
+/* ===================================================================
+   ADMINISTRADOR - PANEL DE CONTROL PREMIUM
+   Diseño con Glassmorphism y Efectos de Seguridad
+   =================================================================== */
 
-/* --- Contenedor Principal --- */
+/* === CONTENEDOR PRINCIPAL === */
 .admin-container {
   display: flex;
   justify-content: center;
-  align-items: center; /* Centrado verticalmente para el login */
+  align-items: center;
   min-height: 100vh;
   padding: 2rem;
   box-sizing: border-box;
 }
 
-/* --- Estilos para la Tarjeta de Acceso del Administrador --- */
+/* === TARJETA DE ACCESO === */
 .admin-login-card {
   width: 100%;
   max-width: 450px;
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
   padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  animation: fadeInUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Borde de gradiente de advertencia */
+.admin-login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--warning-500), var(--error-500), var(--warning-500));
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .admin-login-input {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
-  padding: 14px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1rem;
   color: var(--text-primary);
   font-size: 1rem;
+  font-family: var(--font-family);
   margin-top: 1.5rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all var(--transition-base);
   outline: none;
   box-sizing: border-box;
 }
 
+.admin-login-input::placeholder {
+  color: var(--text-muted);
+}
+
+.admin-login-input:hover {
+  border-color: var(--glass-border-hover);
+}
+
 .admin-login-input:focus {
-  border-color: var(--primary-accent);
-  box-shadow: 0 0 0 3px rgba(90, 118, 243, 0.3);
+  border-color: var(--primary-500);
+  background: var(--glass-bg-hover);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .upload-button.access-button {
   width: 100%;
   margin-top: 1.5rem;
-  background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
+  background: linear-gradient(135deg, var(--warning-500), var(--error-500));
+  color: white;
+  padding: 0.95rem 1.75rem;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .upload-button.access-button:hover {
-  box-shadow: 0 8px 25px rgba(90, 118, 243, 0.35);
+  background: linear-gradient(135deg, var(--warning-400), var(--error-400));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
 }
 
-
-/* --- Estilos para el Panel Principal del Administrador --- */
+/* === PANEL PRINCIPAL === */
 .admin-card {
   width: 100%;
   max-width: 800px;
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
   padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  animation: fadeInUp 0.6s ease-out;
 }
 
 .admin-title {
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .admin-disclaimer {
@@ -94,12 +143,13 @@
 
 .section-title {
   color: var(--text-primary);
-  border-bottom: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--glass-border);
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1.25rem;
 }
 
-/* --- Lista de Usuarios --- */
+/* === LISTA DE USUARIOS === */
 .user-list-section {
   margin-top: 2rem;
 }
@@ -110,17 +160,23 @@
   margin: 0 0 2rem 0;
   max-height: 300px;
   overflow-y: auto;
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
 }
 
 .user-item {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid var(--card-border);
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border-bottom: 1px solid var(--glass-border);
   color: var(--text-secondary);
+  transition: background var(--transition-fast);
+}
+
+.user-item:hover {
+  background: var(--glass-bg-hover);
 }
 
 .user-item:last-child {
@@ -135,44 +191,78 @@
 .no-users-message {
   padding: 2rem;
   text-align: center;
-  color: var(--text-secondary);
-  background-color: rgba(0,0,0,0.2);
-  border-radius: 10px;
+  color: var(--text-tertiary);
+  background: var(--glass-bg);
+  border-radius: var(--radius-lg);
 }
 
-/* --- Botones --- */
+/* === BOTONES === */
 .upload-button.delete-button {
-  background: linear-gradient(90deg, #c44d56, #e11d48); /* Gradiente rojo para peligro */
+  background: linear-gradient(135deg, var(--error-500), var(--error-600));
   width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.75rem;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
 }
 
 .upload-button.delete-button:hover {
-  box-shadow: 0 8px 25px rgba(225, 29, 72, 0.35);
+  background: linear-gradient(135deg, var(--error-400), var(--error-500));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
 }
 
-/* --- Mensajes de Feedback --- */
-.form-error, .form-success, .security-warning {
-  padding: 12px;
-  border-radius: 8px;
+/* === MENSAJES DE FEEDBACK === */
+.form-error,
+.form-success,
+.security-warning {
+  padding: 1rem;
+  border-radius: var(--radius-md);
   text-align: center;
   margin: 1.5rem 0;
   font-weight: 500;
+  animation: fadeInUp 0.3s ease-out;
 }
 
 .form-error {
-  background-color: rgba(255, 82, 82, 0.1);
-  color: var(--error-color);
-  border: 1px solid rgba(255, 82, 82, 0.2);
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error-400);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .form-success {
-  background-color: rgba(0, 200, 83, 0.1);
-  color: var(--success-color);
-  border: 1px solid rgba(0, 200, 83, 0.2);
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-400);
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .security-warning {
-  background-color: rgba(250, 204, 21, 0.1);
-  color: var(--warning-color);
-  border: 1px solid rgba(250, 204, 21, 0.2);
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-400);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* === MEDIA QUERIES === */
+@media (max-width: 480px) {
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .admin-login-card,
+  .admin-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .admin-title {
+    font-size: 1.5rem;
+  }
 }

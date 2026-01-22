@@ -31,9 +31,7 @@ const MenuSeleccion = () => {
   return (
     <div className="menu-container">
       <div className="menu-form">
-        <div className="logo-container">
-          <img src={logoImage} alt="Logo" className="App-logo" />
-        </div>
+        
         
         <div className="menu-card">
           <h1 className="menu-title">Seleccione una opción</h1>

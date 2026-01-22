@@ -3,438 +3,168 @@ import * as XLSX from 'xlsx';
 
 const ExcelGenerator = () => {
   // Usamos las preguntas que ya conocemos del código previo
-  const preguntas = [
+ const preguntas = [
   {
-    texto: "1. ¿Cuál de los siguientes pares de elementos pueden contribuir a formar un puente de hidrógeno?",
+    texto: "En procariontes, el proceso de replicación comienza en un sitio único del cromosoma circular. ¿Cuál es la característica termodinámica principal de este sitio y cómo se denomina la proteína específica encargada de reconocerlo?",
     opciones: [
-      "a. S y Pb",
-      "b. Cl y C",
-      "c. Br y  C",
-      "d. N y O"
+      "a) El sitio es el Telómero, rico en Guaninas; es identificado por el complejo Primasa.",
+      "b) El sitio es el OriC, rico en secuencias A-T que facilitan la desnaturalización; es reconocido por el complejo de proteínas DnaA.",
+      "c) El sitio es la región Promotora, rica en enlaces A-T para dar estabilidad; es reconocido por la Ligasa.",
+      "d) El sitio es el OriC, rico en secuencias C-G que facilitan la desnaturalización; es reconocido por el complejo de proteínas Helicasa"
     ],
-    respuestaCorrecta: 3,
+    respuestaCorrecta: 1, // b
   },
   {
-    texto: "2. ¿Cuál de las siguientes afirmaciones es correcta respecto a la presión osmótica?",
+    texto: "¿Cuál es la función principal de las proteínas de unión a cadena sencilla (SSB) durante la replicación?",
     opciones: [
-      "a. Disminuye al aumentar la osmolaridad de una solución",
-      "b. Es mayor en soluciones hipotónicas",
-      "c. Es mayor en soluciones hipertónicas",
-      "d. No depende de la concentración de soluto"
+      "a) Reconocer los sitios de terminación de la replicación.",
+      "b) Romper los puentes de hidrogeno que unen la doble hélice.",
+      "c) Sintetizar pequeñas cadenas de ARN.",
+      "d) Evitar que las hebras separadas se vuelvan a unir o formen estructuras secundarias."
     ],
-    respuestaCorrecta: 2,
+    respuestaCorrecta: 3, // d
   },
   {
-    texto: "3. ¿Qué sucede si se añaden 0,3 g de NaCl a un litro de agua?",
+    texto: "En pacientes con Amelogénesis Imperfecta ligada al cromosoma X, la mutación se perpetúa. ¿Por qué la replicación discontinua de la hebra rezagada es un desafío adicional para la fidelidad genómica?",
     opciones: [
-      "a. El sodio se solvata con el agua por enlaces covalentes",
-      "b. El sodio y el cloro se solvatan por la baja constante dieléctrica del agua",
-      "c. El sodio y el cloro se separan al máximo, por la elevada constante dieléctrica del agua",
-      "d. La solvatación del sodio y del cloro disminuyen, por la elevada constante dieléctrica del agua"
+      "a) Porque la hebra líder no tiene mecanismos de corrección de errores.",
+      "b) Porque la hebra rezagada se sintetiza más lento, permitiendo que el calcio del esmalte dañe el ADN.",
+      "c) Porque requiere la eliminación y reemplazo de múltiples cebadores de ARN en la hebra rezagada, aumentando las oportunidades de error.",
+      "d) Porque la hebra rezagada no tiene mecanismos de corrección de mutaciones."
     ],
-    respuestaCorrecta: 2,
+    respuestaCorrecta: 2, // c
   },
   {
-    texto: "10. ¿Cuál de las siguientes afirmaciones sobre la estructura y función del colágeno es INCORRECTA?",
+    texto: "Durante la odontogénesis, los pre-ameloblastos duplican su genoma. ¿Qué descripción integra simultáneamente el carácter semiconservativo, bidireccional y simétrico del proceso?",
     opciones: [
-      "a. La glicina es el aminoácido más abundante, apareciendo cada tres residuos en la cadena polipeptídica del colágeno.",
-      "b. La hidroxilación de prolina en el colágeno es fundamental para la estabilidad de la triple hélice.",
-      "c. La vitamina C es esencial para la síntesis adecuada del colágeno.",
-      "d. La formación de enlaces iónicos entre moléculas de colágeno aumenta la resistencia mecánica del tejido."
+      "a) Dos horquillas avanzan en sentidos opuestos desde el origen, en cada una se sintetiza una hebra líder y una rezagada, y al final cada molécula hija conserva una cadena molde original.",
+      "b) La maquinaria avanza en un solo sentido desde el origen de replicación, ambas hebras se sintetizan sin interrupciones.",
+      "c) Se forman dos horquillas que se alejan entre sí, se utilizan fragmentos de Okazaki en ambas hebras nuevas y se destruye la hebra original.",
+      "d) La burbuja se expande hacia ambos lados, pero ambas hebras crecen de forma continua para evitar errores."
     ],
-    respuestaCorrecta: 3,
+    respuestaCorrecta: 0, // a
   },
   {
-    texto: "11. ¿Cuál es el principal tipo de enlace estabiliza la estructura secundaria en las proteínas? (0,5pts)",
+    texto: "¿Cuál de las siguientes enzimas se encarga de la ruptura de los puentes de hidrógeno entre las bases nitrogenadas, separando las dos hebras del ADN?",
     opciones: [
-      "a. Enlaces iónicos",
-      "b. Enlaces peptídicos",
-      "c. Puentes de hidrógeno",
-      "d. Enlaces covalentes sulfurados"
+      "a) Helicasa",
+      "b) Primasa",
+      "c) ADN Polimerasa III",
+      "d) ADN Ligasa"
     ],
-    respuestaCorrecta: 2,
+    respuestaCorrecta: 0, // a
   },
   {
-    texto: "12. ¿A qué se refiere la estructura terciaria de una proteína?",
+    texto: "¿Cuál de las siguientes enzimas se encarga de sintetizar pequeños fragmentos de ARN llamados cebadores (primers)?",
     opciones: [
-      "a. La cadena lineal de aminoácidos",
-      "b. El plegamiento tridimensional completo de una sola cadena polipeptídica",
-      "c. La asociación de varias cadenas polipeptídicas",
-      "d. La presencia de hélices alfa o láminas beta"
+      "a) Helicasa",
+      "b) Primasa",
+      "c) ADN Polimerasa III",
+      "d) ADN Ligasa"
     ],
-    respuestaCorrecta: 1,
+    respuestaCorrecta: 1, // b
   },
   {
-    texto: "13. ¿Cuál de las siguientes descripciones es la más precisa sobre la estructura y función general del colágeno?",
+    texto: "¿Cuál de las siguientes enzimas se encarga de la elongación de la cadena, catalizando la formación del enlace fosfodiéster y añadiendo desoxirribonucleótidos complementarios?",
     opciones: [
-      "a. Es una proteína globular que actúa principalmente como enzima en reacciones metabólicas.",
-      "b. Todos los tipos de colágeno se encuentran exclusivamente en el ligamento periodontal, sin presencia en otros tejidos del cuerpo.",
-      "c. Su principal función es almacenar energía en forma de grasa, similar a los triglicéridos.",
-      "d. El colágeno se compone de una triple hélice formada por tres cadenas de polipéptidos, ricas en aminoácidos como glicina, prolina e hidroxiprolina."
+      "a) Helicasa",
+      "b) Primasa",
+      "c) ADN Polimerasa III",
+      "d) ADN Ligasa"
     ],
-    respuestaCorrecta: 3,
+    respuestaCorrecta: 2, // c
   },
   {
-    texto: "14. Considerando exclusivamente los eventos bioquímicos que ocurren dentro del glóbulo rojo, ¿cuál es el proceso fundamental que explica la alteración morfológica de los eritrocitos y sus consecuencias clínicas en la anemia drepanocítica?",
+    texto: "Transcripción: ¿En qué se diferencia la transcripción de la replicación del ADN?",
     opciones: [
-      "a. Los glóbulos rojos afectados desarrollan receptores de superficie anómalos que atraen y se unen a plaquetas en exceso, formando microtrombos espontáneamente en la circulación.",
-      "b. Se caracteriza por una activación de las enzimas antioxidantes en los eritrocitos, e induce un estrés oxidativo severo y la destrucción de la membrana celular.",
-      "c. La hemoglobina alterada en esta condición se une al oxígeno con una afinidad excepcionalmente alta, lo que impide su liberación efectiva a los tejidos y causa hipoxia generalizada.",
-      "d. La hemoglobina afectada experimenta una polimerización anormal, formando largas fibras rígidas que distorsionan la forma del eritrocito y reducen su capacidad de deformación."
+      "a) En que la replicación se da en el núcleo y la transcripción en el ribosoma",
+      "b) En la polaridad y la direccionalidad",
+      "c) En la simetría y la direccionalidad",
+      "d) En la continuidad y el organelo donde se llevan a cabo"
     ],
-    respuestaCorrecta: 3,
+    respuestaCorrecta: 2, // c (La replicación es simétrica, la transcripción asimétrica)
   },
   {
-    texto: "15. Para optimizar la liberación de oxígeno en los tejidos con alta demanda metabólica (como el músculo en ejercicio), la afinidad de la hemoglobina por el oxígeno debe disminuir. ¿Cuál combinación de factores bioquímicos promueve esta disminución de la afinidad?",
+    texto: "¿Cuál de las subunidades de la ARN polimerasa de procariotas reconoce al promotor?",
     opciones: [
-      "a. Una disminución en la temperatura corporal y una reducción en la producción de dióxido de carbono.",
-      "b. Una disminución del pH (aumento de H+), un incremento en la presión parcial de CO2 y un aumento en la concentración de 2,3-bisfosfoglicerato (2,3-BPG).",
-      "c. Un aumento en el pH y una disminución en la concentración de 2,3-bisfosfoglicerato (2,3-BPG).",
-      "d. Una alta saturación de oxígeno inicial en los pulmones y la ausencia de iones cloruro en el plasma sanguíneo."
+      "a) La alfa",
+      "b) La gamma",
+      "c) La omega",
+      "d) La sigma"
     ],
-    respuestaCorrecta: 1,
+    respuestaCorrecta: 3, // d
   },
   {
-    texto: "16. ¿Cuál es la descripción más precisa del grupo hemo en el contexto de la hemoglobina?",
+    texto: "¿Cuál de las siguientes es una característica de la fase de elongación de la transcripción?",
     opciones: [
-      "a. Un fragmento de ADN que codifica las instrucciones para la síntesis de la hemoglobina.",
-      "b. Es una cadena polipeptídica rica en aminoácidos hidrofóbicos que se une directamente al oxígeno.",
-      "c. Un complejo orgánico con un anillo de porfirina que contiene un átomo de hierro ferroso (Fe2+) en su centro, esencial para la unión reversible de oxígeno.",
-      "d. Una molécula de glucosa modificada que provee energía a las células sanguíneas."
+      "a) Requiere cebador",
+      "b) Requiere de dos enlaces de alta energía",
+      "c) La ARN polimerasa repara errores",
+      "d) No hay superenrollamiento de las hebras de ADN"
     ],
-    respuestaCorrecta: 2,
+    respuestaCorrecta: 1, // b
   },
   {
-    texto: "18. ¿Qué caracteriza al centro activo de una enzima?",
+    texto: "¿Qué utilidad puede tener una secuencia palindrómica en el ADN durante la transcripción?",
     opciones: [
-      "a. Es anhídrido y se encuentra en la superficie de la enzima",
-      "b. Contiene agua, está formado por el sitio de unión al sustrato y el sitio catalítico",
-      "c. Es anhídrido y se encuentra en un bolsillo hidrofóbico",
-      "d. Contiene residuos Val, Leu y Ala que intervienen en la catálisis ácido básica"
+      "a) Indicar el inicio de la replicación",
+      "b) Indicar el sitio de terminación de la transcripción dependiente de Rho",
+      "c) Ser reconocida por la subunidad sigma de la ARN polimerasa",
+      "d) Indicar el sitio de terminación de la transcripción independiente de Rho"
     ],
-    respuestaCorrecta: 2,
+    respuestaCorrecta: 3, // d
   },
   {
-    texto: "19. ¿Cuál de las siguientes afirmaciones es correcta respecto a la Nicotinamida Adenina Dinucleótido?",
+    texto: "¿Qué caracteriza a los factores de transcripción inducibles?",
     opciones: [
-      "a. Es la principal coenzima de las enzimas hidrolasas",
-      "b. Se encuentra débilmente unida a la enzima y transporta al ión hidruro",
-      "c. Está fuertemente unida a las enzimas oxidoreductasas",
-      "d. Transporta dos hidrógenos y se encuentra débilmente unida a las enzimas"
+      "a) Pueden ser potenciadores o silenciadores, reconocen secuencias distales",
+      "b) Están activos en todo momento y son solo potenciadores",
+      "c) Reconocen secuencias proximales para dar inicio a la transcripción",
+      "d) Se unen al promotor basal y son silenciadores"
     ],
-    respuestaCorrecta: 1,
+    respuestaCorrecta: 0, // a
   },
   {
-    texto: "20. ¿Cuál de los siguientes es un mecanismo de acción de las enzimas gingipainas?",
+    texto: "¿Qué provoca la acetilación de las histonas?",
     opciones: [
-      "a. Hidrolizan el colágeno de la matriz extracelular al incorporar una molécula de agua",
-      "b. Hidrolizan al colágeno de las encías, lo cual requiere de energía",
-      "c. Hidrolizan al colágeno de la matriz extracelular, al extraer una molécula de agua",
-      "d. Las opciones “a” y “b” son correctas"
+      "a) La formación de una cromatina laxa que permita la introducción del aparato transcripcional",
+      "b) El superenrollamiento del ADN",
+      "c) La formación de una cromatina compacta que impida la introducción del aparato transcripcional",
+      "d) Es una herramienta farmacológica útil para impedir el crecimiento de tumores"
     ],
-    respuestaCorrecta: 0,
+    respuestaCorrecta: 0, // a
   },
   {
-    texto: "21. ¿Qué se puede afirmar de una enzima que tiene una relación Kcat/KM baja?",
+    texto: "¿Con qué finalidad se une GTP al Factor de Iniciación 2 (IF2) en la fase de iniciación de la traducción de proteínas en procariotas?",
     opciones: [
-      "a. Puede tener alta afinidad pero un bajo recambio",
-      "b. Tiene alta afinidad y eficacia",
-      "c. Puede ser poco eficaz y afin",
-      "d. Es muy eficaz, tiene alta afinidad por su sustrato y es muy veloz"
+      "a) Para catalizar la formación del enlace peptídico en el centro peptidil-transferasa",
+      "b) Para permitir la unión del aminoacil-ARNt al sitio A del ribosoma",
+      "c) Para facilitar el ensamblaje de la subunidad 50S y posicionar el fMet-ARNt en el sitio P",
+      "d) Para impedir la unión del ARNm a la subunidad 30S y evitar traducciones incorrectas"
     ],
-    respuestaCorrecta: 2,
+    respuestaCorrecta: 2, // c
   },
   {
-    texto: "22. ¿Qué significa que una molécula sea un modulador alostérico heterotrópico positivo de una enzima?",
+    texto: "La doxiciclina es un antibiótico efectivo en enfermedad periodontal. Indique cómo actúa a nivel molecular en la traducción de bacterias:",
     opciones: [
-      "a. Que es una molécula ajena a la reacción catalizada por la enzima, que incrementa su actividad al unirse a un sitio diferente al sitio activo de la enzima",
-      "b. Que es una molécula perteneciente a la reacción catalizada por la enzima, que incrementa su actividad al unirse a un sitio diferente al sitio activo de la enzima",
-      "c. Que es una molécula perteneciente a la reacción catalizada por la enzima, que disminuye su actividad al unirse a un sitio diferente al sitio activo de la enzima",
-      "d. Que se une a un sitio alostérico, pero no modifica la actividad de la enzima"
+      "a) Se une a la subunidad 50S e inhibe la peptidil-transferasa",
+      "b) Se une a la subunidad 30S e impide la unión del aminoacil-ARNt al sitio A del ribosoma",
+      "c) Se une al ARNm y produce lectura incorrecta de codones (misreading)",
+      "d) Inhibe la translocación del ribosoma al bloquear el factor EF-G"
     ],
-    respuestaCorrecta: 0,
+    respuestaCorrecta: 1, // b
   },
   {
-    texto: "23. ¿Qué sucede en la catálisis covalente?",
+    texto: "¿Cuáles son los codones de terminación de la traducción?",
     opciones: [
-      "a. En la formación de un enlace covalente con el sustrato que facilita el estado de transición",
-      "b. En un ataque nucleofílico de la enzima que aumenta la energía de transición",
-      "c. En la formación de un enlace covalente entre diferentes partes de una enzima",
-      "d. En un ataque electrofílico que aumenta la energía de activación"
+      "a) AUG, UGA, UAA",
+      "b) UAA, UAG, UGA",
+      "c) UUA, UGA, UGG",
+      "d) UGA, AGA, UAA"
     ],
-    respuestaCorrecta: 0,
-  },
-  {
-    texto: "16. Dada la reacción bioquímica: A + B → C + D, cuyo valor de ΔG = +23,5 kcal/mol, indique cuál de las siguientes afirmaciones es correcta respecto a dicha reacción:",
-    opciones: [
-      "a. Es una reacción espontánea, exergónica que tiende a la entropía.",
-      "b. Es una reacción no espontánea, exergónica que requiere de ATP.",
-      "c. El contenido energético de C y D es menor que el de A y B. La reacción es espontánea.",
-      "d. Los compuestos A y B tienen menor energía que C y D. La reacción es no espontánea."
-    ],
-    respuestaCorrecta: 3,
-  },
-  {
-    texto: "17. ¿Qué es requerido en el anabolismo?",
-    opciones: [
-      "a. Equivalentes de reducción y ATP.",
-      "b. Coenzimas oxidadas y ATP.",
-      "c. Coenzimas reducidas y AMP.",
-      "d. Acetil CoA y AMP."
-    ],
-    respuestaCorrecta: 0,
-  },
-  {
-    texto: "18. ¿Cuál de las siguientes es una razón por la cual se libera energía para la hidrólisis del ATP?",
-    opciones: [
-      "a. Por la presencia de ribosa.",
-      "b. Porque el magnesio estabiliza sus cargas.",
-      "c. Porque su hidrólisis disminuye la repulsión electrostática entre los átomos de oxígeno.",
-      "d. Por el elevado contenido energético de la adenosina que lo compone."
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "19. ¿Qué tipo de reacción cataliza la enzima Piruvato Deshidrogenasa?",
-    opciones: [
-      "a. Transaminación.",
-      "b. Descarboxilación oxidativa.",
-      "c. Hidrólisis.",
-      "d. Descarboxilación reductora."
-    ],
-    respuestaCorrecta: 1,
-  },
-  {
-    texto: "20. ¿Qué función tiene la lipoamida en la enzima E2 de la Piruvato Deshidrogenasa?",
-    opciones: [
-      "a. Descarboxilación oxidativa del Piruvato.",
-      "b. Transferencia del grupo acetilo a la Coenzima A.",
-      "c. Regeneración de la forma reducida de la enzima.",
-      "d. Regulación de la actividad de la enzima Piruvato Deshidrogenasa."
-    ],
-    respuestaCorrecta: 1,
-  },
-  {
-    texto: "21. ¿Cuál es el efecto del ayuno sobre la enzima Piruvato Deshidrogenasa (PDH)?",
-    opciones: [
-      "a. La elevada relación ADP/ATP provoca fosforilación de la PDH, activándola.",
-      "b. El ATP actúa como modulador alostérico heterotrópico positivo de la PDH.",
-      "c. La baja relación ATP/ADP activa a la PDH por modulación alostérica heterotrópica positiva por parte del ADP.",
-      "d. El ADP inhibe a la PDH."
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "22. ¿De dónde proviene la energía necesaria para la síntesis de Citrato en el Ciclo de Krebs?",
-    opciones: [
-      "a. De la hidrólisis del enlace tioéster del Actil CoA.",
-      "b. De los equivalentes de reducción que van a la cadena de transporte de electrones.",
-      "c. De la hidrólisis del oxaloacetato.",
-      "d. Del ATP de la glucólisis."
-    ],
-    respuestaCorrecta: 0,
-  },
-  {
-    texto: "23. ¿Qué enzima del Ciclo de Krebs cataliza la reacción donde hay fosforilación a nivel de sustrato?",
-    opciones: [
-      "a. Succinato Deshidrogenasa.",
-      "b. Piruvato Deshidrogenasa.",
-      "c. Succinil CoA sintetasa.",
-      "d. ATP/ADP translocasa."
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "24. ¿Cuántas moléculas de alta energía (ATP o GTP) se producen dentro del ciclo de Krebs?",
-    opciones: [
-      "a. 30 o 32 dependiendo del tipo de lanzadera.",
-      "b. 1.",
-      "c. 10.",
-      "d. Ninguna porque todas provienen de la cadena de transporte de electrones."
-    ],
-    respuestaCorrecta: 1,
-  },
-  {
-    texto: "25. ¿Qué efecto tiene el ATP sobre la actividad de la enzima Alfacetoglutarato Deshidrogenasa?",
-    opciones: [
-      "a. La inhibe por modificación covalente reversible.",
-      "b. No tiene ningún efecto.",
-      "c. La inhibe por modulación alostérica.",
-      "d. La activa por modificación covalente reversible."
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "26. Es sabido que la enzima Piruvato Carboxilasa sintetiza oxaloacetato a partir de Piruvato y CO₂. ¿Cómo se clasifica esta reacción teniendo en cuenta su vinculación con el Ciclo de Krebs?",
-    opciones: [
-      "a. Anfibólica.",
-      "b. Anfifílica.",
-      "c. Catabólica.",
-      "d. Anaplerótica."
-    ],
-    respuestaCorrecta: 3,
-  },
-  {
-    texto: "¿Cuál de las siguientes afirmaciones es correcta respecto a la alfa amilasa salival?",
-    opciones: [
-      "Su pH óptimo es de 4",
-      "Hidroliza enlaces glicosídicos alfa 1-4",
-      "Su actividad inicia en la boca y se incrementa en el estómago",
-      "Hidroliza enlaces glicosídicos alfa 1-6"
-    ],
-    respuestaCorrecta: 1,
-  },
-  {
-    texto: "¿En dónde se sintetizan las oligosacaridasas?",
-    opciones: [
-      "En el páncreas",
-      "En las glándulas salivales",
-      "En las vellosidades intestinales",
-      "En el colon ascendente"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Qué caracteriza al transportador sglt1?",
-    opciones: [
-      "Se encuentra en las glándulas salivales",
-      "Tiene km bajo y realiza difusión facilitada",
-      "Realiza transporte activo secundario",
-      "Transporta exclusivamente fructosa"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Qué caracteriza al transportador GLUT 2?",
-    opciones: [
-      "Es dependiente de insulina",
-      "Se encuentra exclusivamente en músculo y adipocito",
-      "Es independiente de insulina",
-      "Está exclusivamente en el hígado y en el músculo"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Cuántas moléculas de ATP se generan en la fase de generación energética de la glicolisis anaerobia?",
-    opciones: [
-      "a) 2",
-      "b) 4",
-      "c) 1",
-      "d) 30 o 32 dependiendo de la lanzadera que se use"
-    ],
-    respuestaCorrecta: 1,
-  },
-  {
-    texto: "¿En cuál de las siguientes reacciones de la glicólisis se da una fosforilación de sustrato?",
-    opciones: [
-      "A. En la reacción catalizada por la glucoquinasa",
-      "B. En la fosforilación de fructosa 6 fosfato",
-      "C. En la reacción catalizada por la piruvato quinasa",
-      "D. En la reacción catalizada por la enolasa"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Qué efecto tiene el citrato sobre la actividad enzimática de la enzima fosfofructoquinasa i?",
-    opciones: [
-      "Actúa como modulador alostérico homotrópico negativo",
-      "Destruye al sitio activo de la enzima",
-      "Actúa como modulador alostérico heterotrópico negativo",
-      "No tiene efecto porque es un intermediario del ciclo de krebs"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Qué efecto tiene la fructosa 2,6 bifosfato sobre la enzima fosfofructoquinasa i?",
-    opciones: [
-      "Actúa como modulador alostérico homotrópico negativo",
-      "Destruye al sitio activo de la enzima",
-      "Actúa como modulador alostérico heterotrópico positivo",
-      "Enlentece a la glicólisis"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Por qué la dextrina es uno de los productos de la digestión de los carbohidratos en la boca?",
-    opciones: [
-      "Porque la alfa amilasa no reconoce a los enlaces glicosídicos alfa 1-4",
-      "Porque el pH de la saliva es ligeramente alcalino",
-      "Porque la alfa amilasa salival no reconoce a los enlaces alfa 1-6",
-      "Porque la lactasa no actúa en la boca"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿qué se necesita para que actúe la alfa amilasa pancreatica?",
-    opciones: [
-      "Un pH ácido propiciado por el bicarbonato",
-      "Que el oligosacárido tenga enlaces alfa 1-6",
-      "Un pH alcalino propiciado por el bicarbonato",
-      "Que el íleon tenga un pH alcalino"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Cuál de los siguientes transportadores de glucosa requiere de una concentración muy elevada de esta molécula para activarse?",
-    opciones: [
-      "GLUT 1",
-      "GLUT 2",
-      "GLUT 3",
-      "GLUT 4"
-    ],
-    respuestaCorrecta: 1,
-  },
-  {
-    texto: "¿Cuál de los siguientes transportadores de glucosa es dependiente de insulina?",
-    opciones: [
-      "GLUT 1",
-      "GLUT 2",
-      "GLUT 3",
-      "GLUT 4"
-    ],
-    respuestaCorrecta: 3,
-  },
-  {
-    texto: "¿Cuál de las siguientes es una característica de la glicólisis en el glóbulo rojo?",
-    opciones: [
-      "a) Es aeróbica, produciendo 30 o 32 ATP",
-      "b) Genera 2,3 bifosfoglicerato en una vía alterna",
-      "c) C. Es anaeróbica por la ausencia de núcleo",
-      "d) Es anaeróbica y produce 30 o 32 ATP"
-    ],
-    respuestaCorrecta: 1,
-  },
-  {
-    texto: "¿Qué caracteriza a la enzima piruvato quinasa de la glicólisis?",
-    opciones: [
-      "A. Cataliza a una reacción donde se da fosforilación a nivel de sustrato",
-      "B. Cataliza a una reacción reversible",
-      "C. Es un monómero",
-      "D. Es activa cuando está fosforilada"
-    ],
-    respuestaCorrecta: 0,
-  },
-  {
-    texto: "¿Qué efecto tiene el ATP sobre la actividad enzimática de la enzima fosfofructoquinasa I?",
-    opciones: [
-      "Actúa como modulador alostérico homotrópico negativo",
-      "Destruye al sitio activo de la enzima",
-      "Actúa como modulador alostérico heterotrópico negativo",
-      "No tiene ningún efecto"
-    ],
-    respuestaCorrecta: 2,
-  },
-  {
-    texto: "¿Cuál o cuáles de las siguientes es una enzima regulable de la glicólisis?",
-    opciones: [
-      "La aldolasa y la fosfofructoquinasa II",
-      "La fosfofructoquinasa I",
-      "La enolasa",
-      "La piruvato quinasa y la enolasa"
-    ],
-    respuestaCorrecta: 1,
+    respuestaCorrecta: 1, // b
   }
-]
+];
 
   // Función para convertir los datos al formato requerido para Excel
   const convertirDatosParaExcel = (preguntas) => {

@@ -29,8 +29,7 @@ function Login() {
       });
 
       if (error) throw error;
-      
-      // Se utiliza window.location.href para la redirección.
+
       window.location.href = '/MenuPaginas';
 
     } catch (err) {
@@ -42,68 +41,89 @@ function Login() {
   };
 
   return (
-    <> 
+    <div className="login-page">
       <header className="header">
         <Navbar />
       </header>
-      <div className="container login-container">
-        <form onSubmit={handleLogin} className="login-form">
-          <div className="logo-container">
-            <img src={logoA} className="App-logo" alt="logo" />
-          </div>
 
-          <div className="login-card">
-            <h4 className="login-title">Acceso a la Plataforma</h4>
-            <h5 className="login-disclaimer">Contenido multimedia para aprender con música</h5>
-            
-            <div className="login-card">
-              <label className="input-label">
-                <span>Correo Electrónico:</span>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="login-input"
-                  required
-                />
-              </label>
-
-              <label className="input-label">
-                <span>Contraseña:</span>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="login-input"
-                  required
-                />
-              </label>
-              
+      <main className="login-main">
+        <div className="login-container">
+          <form onSubmit={handleLogin} className="login-form">
+            {/* Logo */}
+            <div className="login-logo">
+              <img src={logoA} className="App-logo" alt="Edubeats logo" />
             </div>
 
-            {error && <div className="login-error">{error}</div>}
-            {success && <div className="login-success">{success}</div>}
+            {/* Card */}
+            <div className="login-card">
+              <div className="login-header">
+                <h1 className="login-title">Iniciar Sesión</h1>
+                <p className="login-subtitle">Accede a tu contenido educativo</p>
+              </div>
 
-            <button className="boton login-button " type="submit" disabled={isLoading}>
-              {isLoading ? 'Procesando...' : 'Acceder'}
-            </button>
+              {/* Form Fields */}
+              <div className="login-fields">
+                <div className="input-group">
+                  <label className="input-label" htmlFor="email">
+                    Correo Electrónico
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="login-input"
+                    placeholder="tu@email.com"
+                    required
+                  />
+                </div>
 
-              <p className="login-disclaimer">
-              Reistro{' '}
-              <a href="/Pago1">
-                No tienes cuenta registrate aqui
-              </a>
-              </p>
-            <p className="login-disclaimer">
-              ¿Olvidaste tu contraseña?{' '}
-              <a href="/Restablecer">
-                Recupérala aquí
-              </a>
-            </p>
-          </div>
-        </form>
-      </div>
-    </>
+                <div className="input-group">
+                  <label className="input-label" htmlFor="password">
+                    Contraseña
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="login-input"
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Messages */}
+              {error && <div className="login-error">{error}</div>}
+              {success && <div className="login-success">{success}</div>}
+
+              {/* Submit Button */}
+              <button className="login-button" type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <span className="spinner-small"></span>
+                    Procesando...
+                  </>
+                ) : (
+                  'Acceder'
+                )}
+              </button>
+
+              {/* Links */}
+              <div className="login-links">
+                <a href="/Pago1" className="login-link">
+                  ¿No tienes cuenta? <strong>Regístrate</strong>
+                </a>
+                <a href="/Restablecer" className="login-link">
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
   );
 }
 

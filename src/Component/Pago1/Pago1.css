@@ -1,69 +1,74 @@
-/* === Variables Globales (Consistentes) === */
-:root {
-  --primary-color: #4a148c;  /* Morado oscuro (Edubeats) */
-  --primary-color-light: #7c4dff;
-  --background-color: #f4f7f6;  /* Gris muy claro */
-  --card-background: #ffffff;   /* Blanco puro */
-  --text-color: #333333;
-  --text-light: #666666;
-  --error-color: #d32f2f;
-  --whatsapp-color: #25D366;  /* Color específico de WhatsApp */
-  --border-radius: 8px;
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --transition-speed: 0.3s ease;
-  --navbar-height: 60px;
-}
+/* ===================================================================
+   PÁGINA DE PAGO - DISEÑO PREMIUM
+   Cards Elegantes con Efectos de WhatsApp
+   =================================================================== */
 
-/* === Reseteo Básico (Asumiendo que no hay un CSS global) === */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.5;
-}
-
-/* === Contenedor Principal (Centrado) === */
+/* === CONTENEDOR PRINCIPAL === */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centra la tarjeta */
+  justify-content: center;
   width: 100%;
   min-height: 100vh;
-  padding: 1.5rem;
-  padding-top: calc(var(--navbar-height) + 20px); 
+  padding: 2rem;
+  padding-top: calc(var(--navbar-height) + 2rem);
 }
 
-/* === Header (Estilizado en Navbar.css) === */
+/* === HEADER === */
 .header {
   z-index: 1000;
 }
 
-/* === Contenedor del Pago === */
+/* === CONTENEDOR DEL PAGO === */
 .payment-container {
   width: 100%;
-  max-width: 600px; /* Ancho ideal para texto */
+  max-width: 600px;
   margin-block: 1rem;
+  animation: fadeInUp 0.6s ease-out;
 }
 
-/* === Tarjeta de Pago === */
+/* === TARJETA DE PAGO === */
 .payment-card {
-  background-color: var(--card-background);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  padding: 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
   width: 100%;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Contenedores de Pasos (Step 1 y Step 2) */
-.terms-container, 
+/* Gradiente decorativo */
+.payment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-500), #25D366, var(--primary-500));
+  background-size: 200% 100%;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Contenedores de Pasos */
+.terms-container,
 .key-check-container {
   display: flex;
   flex-direction: column;
@@ -72,49 +77,73 @@ body {
 .header-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .payment-instruction {
   font-size: 1rem;
-  color: var(--text-light);
-  line-height: 1.6;
+  color: var(--text-secondary);
+  line-height: 1.7;
   margin-bottom: 1.25rem;
   text-align: left;
 }
 
 .payment-instruction:last-of-type {
-  margin-bottom: 2rem; /* Más espacio antes de los botones */
+  margin-bottom: 2rem;
 }
 
 .payment-instruction strong {
-  color: var(--text-color);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
-/* === Estilo Base de Botones (Definido en el JSX) === */
+/* === ESTILO BASE DE BOTONES === */
 .button {
-  display: inline-block;
-  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-family);
   font-size: 1rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  padding: 0.85rem 1.5rem;
+  padding: 0.95rem 1.75rem;
   border: none;
-  border-radius: var(--border-radius);
-  transition: var(--transition-speed);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
   width: 100%;
-  margin-top: 0.75rem; /* Espacio entre botones */
+  margin-top: 0.875rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.button:hover, 
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: left 0.5s ease;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:hover,
 .button:focus {
-  opacity: 0.85;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
   outline: none;
 }
@@ -125,41 +154,45 @@ body {
 
 /* Botón Primario */
 .button--primary {
-  background-color: var(--primary-color);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
+
 .button--primary:hover {
-  background-color: #311b92;
-  opacity: 1;
+  background: linear-gradient(135deg, var(--primary-400), var(--primary-500));
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 /* Botón de WhatsApp */
 .button--whatsapp {
-  background-color: var(--whatsapp-color);
-  color: #ffffff;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
+
 .button--whatsapp:hover {
-  background-color: #1EBE56; /* Un poco más oscuro */
-  opacity: 1;
+  background: linear-gradient(135deg, #2EE370, #25D366);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
 }
 
 /* --- PASO 2: Verificación de Clave --- */
-
 .key-check-container .payment-instruction {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .challenge-number {
   display: inline-block;
-  background-color: #ede7f6; /* Morado pálido */
-  color: var(--primary-color);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--border-radius);
-  font-size: 1.2rem;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: white;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-inline: 0.25rem;
+  margin-inline: 0.35rem;
   vertical-align: middle;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .key-form {
@@ -170,66 +203,85 @@ body {
 .key-input {
   display: block;
   width: 100%;
-  padding: 0.8rem;
-  font-size: 1rem;
-  font-family: inherit;
-  border: 1px solid #ccc;
-  border-radius: var(--border-radius);
-  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-  margin-bottom: 1rem;
+  padding: 0.95rem 1rem;
+  font-size: 1.1rem;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  margin-bottom: 1.25rem;
   text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.key-input::placeholder {
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+.key-input:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--glass-bg-hover);
 }
 
 .key-input:focus {
   outline: none;
-  border-color: var(--primary-color-light);
-  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
+  border-color: var(--primary-500);
+  background: var(--glass-bg-hover);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), 0 0 20px rgba(99, 102, 241, 0.1);
 }
 
 .error-message {
   text-align: center;
   font-size: 0.9rem;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-top: 1.25rem;
+  border-radius: var(--radius-md);
   font-weight: 500;
-  background-color: #ffebf0; /* Rosa pálido */
-  color: var(--error-color);
-  border: 1px solid var(--error-color);
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error-400);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: fadeInUp 0.3s ease-out;
 }
 
-/* === Media Queries === */
-
-/* Tablets */
+/* === MEDIA QUERIES === */
 @media (max-width: 768px) {
   .payment-container {
     max-width: 95%;
   }
+
   .payment-card {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
 }
 
-/* Móviles */
 @media (max-width: 480px) {
-  :root {
-    --navbar-height: 50px;
-  }
   .container {
     padding: 1rem;
-    padding-top: calc(var(--navbar-height) + 20px);
+    padding-top: calc(var(--navbar-height-mobile) + 1.5rem);
   }
+
   .payment-card {
-    padding: 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
+
   .header-title {
     font-size: 1.5rem;
   }
+
   .payment-instruction {
     font-size: 0.95rem;
   }
+
   .button {
     font-size: 0.95rem;
-    padding: 0.8rem 1.2rem;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .challenge-number {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.75rem;
   }
 }
