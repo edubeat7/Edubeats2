@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import * as XLSX from 'xlsx';
-import './ListaProveedores.css'; // Asegúrate de que este CSS exista
+import './ListaDeVideos.css';
 import Navbar from '../Navbar/Navbar';
 
 const supabase = createClient(
@@ -9,15 +9,12 @@ const supabase = createClient(
   import.meta.env.VITE_APP_SUPABASE_ANON_KEY
 );
 
-// Componente renombrado para mayor claridad
-export default function ListaProveedores() {
-  // Estado adaptado a la nueva estructura
-  const [proveedores, setProveedores] = useState([]);
-  const [filteredProveedores, setFilteredProveedores] = useState([]);
-  const [rubros, setRubros] = useState([]);
-  const [rubroFilter, setRubroFilter] = useState('');
-  
-  // Estados generales
+export default function ListaDeVideos() {
+  const [videos, setVideos] = useState([]);
+  const [filteredVideos, setFilteredVideos] = useState([]);
+  const [temas, setTemas] = useState([]);
+  const [temaFilter, setTemaFilter] = useState('');
+
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [isExcelLoaded, setIsExcelLoaded] = useState(false);
@@ -38,41 +35,39 @@ export default function ListaProveedores() {
     };
   }, []);
 
-  // Lógica de filtrado actualizada
   useEffect(() => {
-    if (proveedores.length === 0) return;
-    
-    let filtered = [...proveedores];
-    
+    if (videos.length === 0) return;
+
+    let filtered = [...videos];
+
     if (searchTerm.trim() !== '') {
       const searchLower = searchTerm.toLowerCase();
-      filtered = filtered.filter(p => 
-        (p.empresa && p.empresa.toLowerCase().includes(searchLower)) ||
-        (p.rubro && p.rubro.toLowerCase().includes(searchLower))
+      filtered = filtered.filter(v =>
+        (v.tema && v.tema.toLowerCase().includes(searchLower)) ||
+        (v.contenido && v.contenido.toLowerCase().includes(searchLower))
       );
     }
-    
-    if (rubroFilter) {
-      filtered = filtered.filter(p => p.rubro && p.rubro === rubroFilter);
+
+    if (temaFilter) {
+      filtered = filtered.filter(v => v.tema && v.tema === temaFilter);
     }
-    
-    setFilteredProveedores(filtered);
-  }, [searchTerm, rubroFilter, proveedores]);
+
+    setFilteredVideos(filtered);
+  }, [searchTerm, temaFilter, videos]);
 
   const fetchExcelFile = async () => {
     try {
       setIsLoading(true);
       setErrorMessage('');
-      
+
       const { data, error } = await supabase.storage
-        .from('linkdeposito')
-        .getPublicUrl('ListaDeProveedores.xlsx');
+        .from('MaterialAdicional')
+        .getPublicUrl('ListaDeVideos.xlsx');
 
       if (error) throw new Error('No se pudo obtener la URL del archivo. Revisa que el archivo exista y que el bucket sea público.');
 
-      // Añadimos un timestamp para evitar problemas de caché
       await loadExcelData(`${data.publicUrl}?t=${Date.now()}`);
-      
+
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage(`Error al cargar el archivo: ${error.message}`);
@@ -84,30 +79,27 @@ export default function ListaProveedores() {
     try {
       const response = await fetch(fileUrl);
       if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-      
+
       const arrayBuffer = await response.arrayBuffer();
       const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-      
+
       if (jsonData.length < 1) throw new Error('El archivo Excel está vacío.');
-      
+
       const headers = jsonData[0].map(h => h.trim());
-      // *** CAMBIO CLAVE: Nuevos encabezados esperados ***
-      const expectedHeaders = ['Rubro', 'Empresa', 'Ubicación', 'Número'];
-      
+      const expectedHeaders = ['Tema', 'Contenido', 'Enlace'];
+
       if (!expectedHeaders.every(h => headers.includes(h))) {
         throw new Error(`Estructura incorrecta. Encabezados requeridos: ${expectedHeaders.join(', ')}`);
       }
-      
-      // *** CAMBIO CLAVE: Mapeo a la nueva estructura de datos ***
+
       const normalizedData = jsonData.slice(1).map(row => {
         if (row.every(cell => cell === null || cell === '')) return null;
         return {
-          rubro: row[headers.indexOf('Rubro')]?.toString() || '',
-          empresa: row[headers.indexOf('Empresa')]?.toString() || '',
-          Ubicacion: row[headers.indexOf('Ubicación')]?.toString() || '',
-          numero: row[headers.indexOf('Número')]?.toString() || ''
+          tema: row[headers.indexOf('Tema')]?.toString() || '',
+          contenido: row[headers.indexOf('Contenido')]?.toString() || '',
+          enlace: row[headers.indexOf('Enlace')]?.toString() || ''
         };
       }).filter(Boolean);
 
@@ -115,15 +107,15 @@ export default function ListaProveedores() {
         throw new Error('El archivo no contiene datos válidos.');
       }
 
-      const uniqueRubros = [...new Set(normalizedData.map(p => p.rubro))]
+      const uniqueTemas = [...new Set(normalizedData.map(v => v.tema))]
         .filter(Boolean)
         .sort((a, b) => a.localeCompare(b));
 
-      setProveedores(normalizedData);
-      setFilteredProveedores(normalizedData);
-      setRubros(uniqueRubros);
+      setVideos(normalizedData);
+      setFilteredVideos(normalizedData);
+      setTemas(uniqueTemas);
       setIsExcelLoaded(true);
-      
+
     } catch (error) {
       console.error('Error al procesar el archivo:', error);
       setErrorMessage(error.message);
@@ -133,11 +125,35 @@ export default function ListaProveedores() {
   };
 
   const handleSearch = (e) => setSearchTerm(e.target.value);
-  const handleRubroChange = (e) => setRubroFilter(e.target.value);
-  
+  const handleTemaChange = (e) => setTemaFilter(e.target.value);
+
   const handleClearFilters = () => {
     setSearchTerm('');
-    setRubroFilter('');
+    setTemaFilter('');
+  };
+
+  // Función para construir la URL del PDF desde Supabase
+  const buildPdfUrl = (enlace) => {
+    if (!enlace) return null;
+
+    // Si ya es una URL completa, usarla directamente
+    if (enlace.startsWith('http://') || enlace.startsWith('https://')) {
+      return enlace;
+    }
+
+    // Construir URL pública de Supabase
+    const { data } = supabase.storage
+      .from('MaterialAdicional')
+      .getPublicUrl(enlace.trim());
+
+    return data.publicUrl;
+  };
+
+  const handleOpenLink = (enlace) => {
+    const url = buildPdfUrl(enlace);
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
   };
 
   const showScrollHint = isExcelLoaded && windowWidth < 1000;
@@ -146,11 +162,11 @@ export default function ListaProveedores() {
     <div className="container">
       <header className="header"><Navbar /></header>
 
-      <div className="proveedores-container">
+      <div className="videos-container">
         <div className="header-wrapper">
           <div className="header-content">
-            <h1 className="main-title">📋 Lista de Proveedores</h1>
-            <p className="welcome-message">Busca y filtra proveedores por rubro o nombre.</p>
+            <h1 className="main-title">Material Adicional</h1>
+            <p className="welcome-message">Busca y filtra material educativo por tema o contenido.</p>
           </div>
         </div>
 
@@ -158,22 +174,22 @@ export default function ListaProveedores() {
           <div className="search-filters">
             <input
               type="text"
-              placeholder="Buscar por empresa o rubro..."
+              placeholder="Buscar por tema o contenido..."
               value={searchTerm}
               onChange={handleSearch}
               className="search-input"
             />
-            <select 
-              value={rubroFilter} 
-              onChange={handleRubroChange}
+            <select
+              value={temaFilter}
+              onChange={handleTemaChange}
               className="category-select"
             >
-              <option value="">Todos los rubros</option>
-              {rubros.map((rubro, index) => (
-                <option key={index} value={rubro}>{rubro}</option>
+              <option value="">Todos los temas</option>
+              {temas.map((tema, index) => (
+                <option key={index} value={tema}>{tema}</option>
               ))}
             </select>
-            {(searchTerm || rubroFilter) && (
+            {(searchTerm || temaFilter) && (
               <button className="upload-button clear-filter-button" onClick={handleClearFilters}>
                 Limpiar filtros
               </button>
@@ -187,32 +203,37 @@ export default function ListaProveedores() {
           </div>
         )}
 
-        {isExcelLoaded && filteredProveedores.length > 0 && (
-          <div className="proveedores-table-wrapper">
+        {isExcelLoaded && filteredVideos.length > 0 && (
+          <div className="videos-table-wrapper">
             <div className="results-count">
-              Mostrando {filteredProveedores.length} de {proveedores.length} proveedores
+              Mostrando {filteredVideos.length} de {videos.length} materiales
             </div>
-            
-            <div className="proveedores-table">
+
+            <div className="videos-table">
               <div className="table-header">
-                <div className="header-cell">Rubro</div>
-                <div className="header-cell">Empresa</div>
-                <div className="header-cell">Ubicación</div>
-                <div className="header-cell">Número</div>
+                <div className="header-cell">Tema</div>
+                <div className="header-cell">Contenido</div>
+                <div className="header-cell">Enlace</div>
               </div>
-              
+
               <div className="table-body">
-                {filteredProveedores.map((p, index) => (
+                {filteredVideos.map((v, index) => (
                   <div key={index} className="table-row">
-                    <div className="table-cell" data-label="Rubro">
-                      <span className="category-badge">{p.rubro}</span>
+                    <div className="table-cell" data-label="Tema">
+                      <span className="category-badge">{v.tema}</span>
                     </div>
-                    <div className="table-cell empresa-cell" data-label="Empresa">
-                      {p.empresa}
+                    <div className="table-cell contenido-cell" data-label="Contenido">
+                      {v.contenido}
                     </div>
-                    <div className="table-cell" data-label="Ubicación">{p.Ubicacion}</div>
-                    <div className="table-cell" data-label="Número">
-                      {p.numero}
+                    <div className="table-cell" data-label="Enlace">
+                      {v.enlace && (
+                        <button
+                          className="link-button"
+                          onClick={() => handleOpenLink(v.enlace)}
+                        >
+                          Ver Material
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -224,7 +245,7 @@ export default function ListaProveedores() {
         {isLoading && (
           <div className="loading-container">
             <div className="spinner"></div>
-            <p>Cargando proveedores...</p>
+            <p>Cargando material educativo...</p>
           </div>
         )}
 
@@ -236,10 +257,10 @@ export default function ListaProveedores() {
             </button>
           </div>
         )}
-        
-        {isExcelLoaded && filteredProveedores.length === 0 && !isLoading && (
+
+        {isExcelLoaded && filteredVideos.length === 0 && !isLoading && (
           <div className="no-results">
-            <p>No se encontraron proveedores que coincidan con tu búsqueda.</p>
+            <p>No se encontró material que coincida con tu búsqueda.</p>
             <button className="upload-button clear-filter-button" onClick={handleClearFilters}>
               Limpiar filtros
             </button>

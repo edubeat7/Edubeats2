@@ -18,6 +18,8 @@ import GeneradorPrueba from "./Component/PruebaAutomatica/GeneradorPrueba";
 import PruebaAutomatica from "./Component/PruebaAutomatica/PruebaAutomatica";
 import PaginaAudio from "./Component/PaginaAudio/PaginaAudio";
 import ListaProveedores from "./Component/ListaProveedores/ListaProveedores";
+import ListaDeVideos from "./Component/ListaDeVideos/ListaDeVideos";
+import ListaDePDF from "./Component/ListaDePDF/ListaDePDF";
 
 // Componentes Guardianes
 import PaymentRoute from './Component/PaymentRoute/PaymentRoute';
@@ -63,6 +65,12 @@ function App() {
             </Route>
             <Route exact path="/ListaProveedores">
                <ProtectedRoute> <ListaProveedores /> </ProtectedRoute>
+            </Route>
+            <Route exact path="/ListaDeVideos">
+               <ProtectedRoute> <ListaDeVideos /> </ProtectedRoute>
+            </Route>
+            <Route exact path="/ListaDePDF">
+               <ProtectedRoute> <ListaDePDF /> </ProtectedRoute>
             </Route>
           </Switch>
         </Router>

@@ -1,0 +1,443 @@
+/* ===================================================================
+   LISTA DE PDF - TABLA PREMIUM
+   Diseño con Cards Responsivos y Filtros (basado en ListaProveedores)
+   =================================================================== */
+
+/* === CONTENEDOR PRINCIPAL === */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem;
+    padding-top: calc(var(--navbar-height) + 2rem);
+}
+
+/* === HEADER === */
+.header {
+    z-index: 1000;
+}
+
+/* === CONTENEDOR DE PDFs === */
+.pdf-container {
+    width: 100%;
+    max-width: 1100px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-xl);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.header-wrapper {
+    text-align: center;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.main-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-message {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* === SECCIÓN DE CONTROLES Y FILTROS === */
+.controls-section {
+    margin-bottom: 1.5rem;
+}
+
+.search-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search-input,
+.category-select {
+    flex-grow: 1;
+    flex-basis: 200px;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    color: var(--text-primary);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.category-select option {
+    background: var(--dark-800);
+    color: var(--text-primary);
+}
+
+.search-input:hover,
+.category-select:hover {
+    border-color: var(--glass-border-hover);
+}
+
+.search-input:focus,
+.category-select:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    background: var(--glass-bg-hover);
+}
+
+/* === BOTÓN BASE === */
+.upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+    color: white;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.upload-button:hover {
+    background: linear-gradient(135deg, var(--primary-400), var(--primary-500));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* Botón de limpiar filtros */
+.clear-filter-button {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    flex-basis: 150px;
+    flex-grow: 0;
+    box-shadow: none;
+}
+
+.clear-filter-button:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    color: var(--text-primary);
+    box-shadow: none;
+}
+
+/* === BOTÓN VER PDF === */
+.view-pdf-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.625rem 1rem;
+    border: none;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.view-pdf-button:hover {
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+}
+
+.view-pdf-button i {
+    font-size: 0.85rem;
+}
+
+/* === AVISO DE SCROLL === */
+.scroll-hint {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+    display: none;
+}
+
+/* === WRAPPER DE LA TABLA === */
+.pdf-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.results-count {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+}
+
+/* === TABLA === */
+.pdf-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+/* Encabezado de la Tabla */
+.table-header {
+    display: table-header-group;
+}
+
+.header-cell {
+    display: table-cell;
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--glass-border);
+    white-space: nowrap;
+    background: var(--glass-bg);
+}
+
+/* Cuerpo de la Tabla */
+.table-body {
+    display: table-row-group;
+}
+
+.table-row {
+    display: table-row;
+    border-bottom: 1px solid var(--glass-border);
+    transition: background var(--transition-fast);
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.table-row:hover {
+    background: var(--glass-bg-hover);
+}
+
+.table-cell {
+    display: table-cell;
+    padding: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    vertical-align: middle;
+}
+
+/* Celda de nombre del PDF */
+.pdf-name-cell {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Badge de Categoría */
+.category-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(244, 114, 182, 0.15));
+    color: var(--primary-300);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* === ESTADOS DE CARGA, ERROR Y SIN RESULTADOS === */
+.loading-container,
+.error-container,
+.no-results {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-secondary);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-container p,
+.no-results p {
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid var(--glass-border);
+    border-top-color: var(--primary-500);
+    border-radius: var(--radius-full);
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.retry-button {
+    background: linear-gradient(135deg, var(--primary-400), var(--primary-500));
+}
+
+/* === MEDIA QUERIES === */
+
+/* Tablets y Móviles */
+@media (max-width: 800px) {
+    .scroll-hint {
+        display: none;
+    }
+
+    .pdf-table-wrapper {
+        overflow-x: hidden;
+    }
+
+    .table-header {
+        display: none;
+    }
+
+    .pdf-table,
+    .table-body,
+    .table-row,
+    .table-cell {
+        display: block;
+        width: 100%;
+    }
+
+    .pdf-table {
+        min-width: 0;
+    }
+
+    .table-row {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        transition: all var(--transition-base);
+    }
+
+    .table-row:hover {
+        background: var(--glass-bg-hover);
+        border-color: var(--glass-border-hover);
+        transform: translateY(-2px);
+    }
+
+    .table-cell {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.875rem 1rem;
+        border-bottom: 1px dashed var(--glass-border);
+        text-align: right;
+    }
+
+    .table-cell:last-child {
+        border-bottom: none;
+        justify-content: center;
+    }
+
+    .table-cell::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-primary);
+        text-align: left;
+        margin-right: 1rem;
+    }
+
+    .table-cell:last-child::before {
+        display: none;
+    }
+
+    .category-badge {
+        justify-self: flex-end;
+    }
+
+    .view-pdf-button {
+        width: 100%;
+        padding: 0.875rem;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+        padding-top: calc(var(--navbar-height-mobile) + 1.5rem);
+    }
+
+    .pdf-container {
+        padding: 1.25rem 1rem;
+    }
+
+    .header-wrapper {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .main-title {
+        font-size: 1.5rem;
+    }
+
+    .welcome-message {
+        font-size: 0.95rem;
+    }
+
+    .search-filters {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .search-input,
+    .category-select,
+    .clear-filter-button {
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    .table-cell {
+        padding: 0.75rem;
+    }
+}

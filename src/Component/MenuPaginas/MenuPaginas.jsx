@@ -19,7 +19,7 @@ const MenuSeleccion = () => {
       if (error) {
         console.error('Error al cerrar sesión:', error);
       }
-      
+
       // Paso 2: Una vez cerrada la sesión, redirigir al inicio
       window.location.href = '/Home';
 
@@ -31,13 +31,13 @@ const MenuSeleccion = () => {
   return (
     <div className="menu-container">
       <div className="menu-form">
-        
-        
+
+
         <div className="menu-card">
           <h1 className="menu-title">Seleccione una opción</h1>
-          
+
           <div className="menu-options">
-            
+
             <a href="/PruebaAutomatica" className="menu-option">
               <div className="option-icon">
                 <i className="fas fa-tasks"></i>
@@ -52,22 +52,36 @@ const MenuSeleccion = () => {
               <span className="option-text">Lista de proveedores</span>
             </a>
 
-          <a href="/PaginaAudio" className="menu-option">
+            <a href="/PaginaAudio" className="menu-option">
               <div className="option-icon">
                 <i className="fas fa-tasks"></i>
               </div>
               <span className="option-text">Audios educativos</span>
             </a>
+
+            <a href="/ListaDeVideos" className="menu-option">
+              <div className="option-icon">
+                <i className="fas fa-video"></i>
+              </div>
+              <span className="option-text">Visores y videos</span>
+            </a>
+
+            <a href="/ListaDePDF" className="menu-option">
+              <div className="option-icon">
+                <i className="fas fa-file-pdf"></i>
+              </div>
+              <span className="option-text">Material Adicional PDF</span>
+            </a>
           </div>
 
-          
+
           <p className="menu-disclaimer">
             Seleccione una opción para continuar
           </p>
         </div>
 
         <div className="card2">
-          <button 
+          <button
             className="upload-button logout-button"
             onClick={handleLogout}
           >

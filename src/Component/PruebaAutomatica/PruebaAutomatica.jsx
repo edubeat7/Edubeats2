@@ -42,7 +42,7 @@ export default function ExcelQuizInterface() {
   useEffect(() => {
     if (isExcelLoaded && !showResults) {
       // Iniciar temporizador de 15 minutos (900 segundos)
-      const timeLimit = 45 * 60; 
+      const timeLimit = 20 * 60; 
       setRemainingTime(timeLimit);
       
       timerRef.current = setInterval(() => {
@@ -579,6 +579,7 @@ export default function ExcelQuizInterface() {
           <div className="questions-section">
             <h2 className="quiz-title">
               {selectedFileName}
+              <span className="quiz-subtitle">Las preguntas se seleccionan aleatoriamente de un banco de 10 o más enunciados.</span>
               <span className="quiz-subtitle">Responde todas las preguntas</span>
             </h2>
             
