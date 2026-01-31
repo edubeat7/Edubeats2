@@ -493,7 +493,7 @@ export default function ExcelQuizInterface() {
         <div className="header-wrapper">
           <div className="header-content">
             <h1 className="main-title"> Cuestionario de Biofísica</h1>
-            <p className="welcome-message">Bienvenido, {userName}</p>
+            <p className="welcome-message">Bienvenido {userName}</p>
           </div>
         </div>
 
@@ -579,7 +579,7 @@ export default function ExcelQuizInterface() {
           <div className="questions-section">
             <h2 className="quiz-title">
               {selectedFileName}
-              <span className="quiz-subtitle">Las preguntas se seleccionan aleatoriamente de un banco de 10 o más enunciados.</span>
+              <span className="quiz-subtitle">Se seleccionarán 10 preguntas aleatorias de nuestro banco de enunciados.</span>
               <span className="quiz-subtitle">Responde todas las preguntas</span>
             </h2>
             

@@ -5,196 +5,128 @@ const ExcelGenerator = () => {
   // Usamos las preguntas que ya conocemos del código previo
  const preguntas = [
   {
-    texto: "¿Cuál de las siguientes descripciones define correctamente el enlace que otorga direccionalidad a la estructura primaria del ADN?",
+    texto: "¿Cuál es la característica estructural del agua que permite la formación de puentes de hidrógeno y determina su constante dieléctrica?",
     opciones: [
-      "a) Enlace fosfodiéster entre el carbono 3' de una desoxirribosa y el fosfato unido al carbono 5' de la siguiente",
-      "b) Enlace peptídico entre los grupos amino y carboxilo de nucleótidos adyacentes",
-      "c) Puente de hidrógeno entre las bases nitrogenadas de la misma cadena",
-      "d) Enlace glucosídico entre bases complementarias de hebras opuestas"
+      "A. La formación de enlaces covalentes coordinados entre el oxígeno de una molécula y el hidrógeno de otra.",
+      "B. La geometría lineal de la molécula que facilita el empaquetamiento denso en estado líquido.",
+      "C. La capacidad del oxígeno para compartir cuatro electrones con cada átomo de hidrógeno.",
+      "D. La naturaleza de dipolo eléctrico de la molécula debido a la diferencia de electronegatividad entre el oxígeno y el hidrógeno."
     ],
-    respuestaCorrecta: 0, // a
+    respuestaCorrecta: 3 // D
   },
   {
-    texto: "Si una muestra de ADN presenta un alto contenido de Guanina y Citosina (G-C), ¿qué propiedad estructural se espera observar?",
+    texto: "Desde el punto de vista bioquímico, ¿por qué el alto calor específico del agua es vital para el mantenimiento de la homeostasis en la cavidad oral?",
     opciones: [
-      "a) Menor estabilidad ante la desnaturalización térmica por tener tres puentes de hidrógeno",
-      "b) Mayor facilidad para la separación de las hebras por la presencia de dos puentes de hidrógeno",
-      "c) Mayor temperatura de fusión (Tm) debido a que el par G-C se estabiliza mediante tres puentes de hidrógeno",
-      "d) Una estructura secundaria tipo Z-ADN de forma predominante"
+      "A. Mantiene la viscosidad de la saliva constante independientemente de la temperatura de los alimentos ingeridos.",
+      "B. Permite que la saliva absorba grandes cantidades de energía térmica sin cambios bruscos en la temperatura de la boca y sin ocasionar daños a los tejidos.",
+      "C. Facilita la transferencia rápida de calor desde los alimentos calientes hacia la pulpa dental.",
+      "D. Garantiza que el agua se evapore rápidamente de la mucosa oral para enfriar los tejidos mediante conducción."
     ],
-    respuestaCorrecta: 2, // c
+    respuestaCorrecta: 1 // B
   },
   {
-    texto: "¿Cuál de las siguientes opciones describe mejor el conjunto de fuerzas que estabilizan la doble hélice de ADN en el entorno celular?",
+    texto: "La molécula de agua posee una geometría angular de 104.5°. ¿Cuál es la consecuencia inmediata de esta estructura unida a la diferencia de electronegatividad entre sus átomos?",
     opciones: [
-      "a) Principalmente enlaces covalentes entre las bases nitrogenadas y el esqueleto azúcar-fosfato",
-      "b) Exclusivamente fuerzas iónicas entre los grupos fosfato cargados negativamente",
-      "c) Puentes de hidrógeno entre bases, apilamiento hidrofóbico y repulsión electrostática mitigada por cationes",
-      "d) Enlaces peptídicos y fuerzas de Van der Waals únicamente"
+      "A) La formación de un dipolo eléctrico con una carga parcial negativa sobre el oxígeno.",
+      "B) La anulación de los momentos dipolares, resultando en una molécula apolar.",
+      "C) La capacidad de formar enlaces covalentes dobles con otras moléculas de agua.",
+      "D) El aumento de la distancia de enlace entre los átomos de hidrógeno."
     ],
-    respuestaCorrecta: 2, // c
+    respuestaCorrecta: 0 // A
   },
   {
-    texto: "En procariontes, ¿cuál es la característica termodinámica del sitio de origen (OriC) y qué proteína lo reconoce inicialmente?",
+    texto: "En el contexto de los puentes de hidrógeno, ¿cuál es el número máximo de interacciones de este tipo que una sola molécula de agua puede establecer con sus vecinas en estado líquido?",
     opciones: [
-      "a) Es una región rica en G-C (alta Tm) y la proteína se denomina helicasa",
-      "b) Es una región rica en A-T (baja Tm) y la proteína se denomina DnaA",
-      "c) Es una región con alta metilación y la proteína se denomina primasa",
-      "d) Es una región con secuencias repetitivas y la proteína se denomina ADN polimerasa I"
+      "A) Dos: una a través de cada átomo de hidrógeno.",
+      "B) Tres: dos a través del oxígeno y una a través de un hidrógeno.",
+      "C) Cuatro: dos a través de los hidrógenos y dos a través de los pares de electrones libres del oxígeno.",
+      "D) Seis: dependiendo de la presión hidrostática del medio."
     ],
-    respuestaCorrecta: 1, // b
+    respuestaCorrecta: 2 // C
   },
   {
-    texto: "¿Cuál es la función principal de las proteínas de unión a cadena sencilla (SSB) durante la replicación?",
+    texto: "El agua tiene un alto calor de vaporización (2,260kJ/kg). Bioquímicamente, ¿qué proceso físico describe mejor esta propiedad?",
     opciones: [
-      "a) Cortar los fragmentos de Okazaki",
-      "b) Estabilizar las hebras separadas e impedir que se reapareen",
-      "c) Unir nucleótidos al extremo 3' de la cadena nueva",
-      "d) Formar el cebador de ARN"
+      "A) La energía necesaria para romper los enlaces covalentes OH dentro de la molécula.",
+      "B) La energía requerida para romper los puentes de hidrógeno y liberar las moléculas al estado gaseoso.",
+      "C) La capacidad de absorber calor sin que la temperatura del sistema aumente.",
+      "D) El movimiento vibracional de los átomos de oxígeno antes de la ebullición."
     ],
-    respuestaCorrecta: 1, // b
+    respuestaCorrecta: 1 // B
   },
   {
-    texto: "En relación a la Amelogénesis Imperfecta (gen AMELX), ¿por qué la replicación discontinua es un desafío para la fidelidad genómica?",
+    texto: "¿Qué ocurre termodinámicamente cuando una sustancia hidrofóbica se introduce en agua (efecto hidrofóbico)?",
     opciones: [
-      "a) Porque la hebra rezagada no usa ADN polimerasa",
-      "b) Porque requiere síntesis en fragmentos de Okazaki y múltiples eventos de cebado, aumentando puntos de error",
-      "c) Porque la hebra rezagada se replica obligatoriamente en sentido 3'→5'",
-      "d) Porque el proceso no requiere la actividad de la helicasa"
+      "A) El agua se vuelve más desordenada, aumentando la entropía del sistema.",
+      "B) Las moléculas de agua forman una estructura tipo \"jaula\" (clatrato) más ordenada alrededor de la sustancia, disminuyendo la entropía local.",
+      "C) La sustancia hidrofóbica forma puentes de hidrógeno de alta energía con el solvente.",
+      "D) El agua disuelve la sustancia mediante la formación de capas de solvatación iónica."
     ],
-    respuestaCorrecta: 1, // b
+    respuestaCorrecta: 1 // B
   },
   {
-    texto: "¿Qué descripción integra simultáneamente el carácter semiconservativo, bidireccional y simétrico de la replicación?",
+    texto: "El agua es un reactivo químico en muchas rutas metabólicas. ¿En qué consiste específicamente una reacción de hidrólisis?",
     opciones: [
-      "a) Dos horquillas avanzan en sentidos opuestos, en cada una hay una hebra líder y una rezagada, conservando una cadena original",
-      "b) La maquinaria avanza en un solo sentido y el ADN resultante es una mezcla aleatoria de fragmentos",
-      "c) Se forman dos horquillas que se alejan entre sí y se destruye la hebra original para ser reemplazada",
-      "d) La burbuja se expande hacia ambos lados, pero ambas hebras crecen de forma continua para evitar errores"
+      "A) En la eliminación de una molécula de agua para formar un enlace entre dos monómeros.",
+      "B) En la ruptura de un enlace químico mediante la adición de los componentes de una molécula de agua.",
+      "C) En la transferencia de electrones desde el agua hacia un sustrato orgánico.",
+      "D) En la disociación del agua en iones H+ y OH- sin afectar al soluto."
     ],
-    respuestaCorrecta: 0, // a
+    respuestaCorrecta: 1 // B
   },
   {
-    texto: "¿Cuál de las siguientes enzimas se encarga de romper los puentes de hidrógeno para separar las dos hebras del ADN?",
+    texto: "¿Cuál de las siguientes afirmaciones define correctamente el concepto de \"producto iónico del agua\" (Kw)?",
     opciones: [
-      "a) Helicasa",
-      "b) ADN Polimerasa III",
-      "c) ADN Ligasa",
-      "d) Topoisomerasa"
+      "A) Es la suma de las concentraciones de protones e hidroxilos en una solución ácida.",
+      "B) Es la relación entre la masa del agua y su volumen a 4°C.",
+      "C) Es la medida de la capacidad del agua para resistir cambios bruscos de pH.",
+      "D) Es el valor constante que resulta del producto de las concentraciones de H+ y OH- a una temperatura dada."
     ],
-    respuestaCorrecta: 0, // a
+    respuestaCorrecta: 3 // D
   },
   {
-    texto: "¿Qué enzima sintetiza los cebadores (primers) que proporcionan el extremo 3'-OH libre para iniciar la síntesis?",
+    texto: "Las moléculas anfipáticas tienen la propiedad de poseer una región polar y una región apolar. ¿Cómo se organizan estas moléculas al ser rodeadas por agua?",
     opciones: [
-      "a) Helicasa",
-      "b) Primasa",
-      "c) ADN Polimerasa I",
-      "d) ADN Multimerasa"
+      "A) Exponiendo sus cadenas hidrocarbonadas al solvente para maximizar el contacto.",
+      "B) Orientando sus grupos polares hacia el agua y protegiendo sus colas apolares en el interior de agregados.",
+      "C) Disolviéndose individualmente mediante la formación de puentes de hidrógeno en toda su estructura.",
+      "D) Precipitando en el fondo del recipiente sin establecer ninguna interacción con el agua."
     ],
-    respuestaCorrecta: 1, // b
+    respuestaCorrecta: 1 // B
   },
   {
-    texto: "¿Cuál de las siguientes enzimas se encarga de la elongación de la cadena añadiendo desoxirribonucleótidos complementarios?",
+    texto: "Debido a su alta constante dieléctrica, el agua es un excelente solvente para compuestos iónicos. ¿Cuál es el mecanismo principal de esta propiedad?",
     opciones: [
-      "a) ADN Polimerasa III",
-      "b) ADN Ligasa",
-      "c) Primasa",
-      "d) Helicasa"
+      "A) El agua aumenta la fuerza de atracción entre los cationes y los aniones.",
+      "B) El agua transfiere protones a los iones para convertirlos en moléculas neutras.",
+      "C) El agua disminuye la fuerza electrostática entre los iones al interponerse entre ellos y formar esferas de solvatación.",
+      "D) El agua actúa como un catalizador sólido que fragmenta los cristales de sal."
     ],
-    respuestaCorrecta: 0, // a
+    respuestaCorrecta: 2 // C
   },
   {
-    texto: "¿En qué se diferencia fundamentalmente la transcripción de la replicación del ADN?",
+    texto: "La tensión superficial del agua es notablemente alta en comparación con otros líquidos. ¿A qué se debe este fenómeno?",
     opciones: [
-      "a) La transcripción produce ARN a partir de ADN; la replicación duplica el genoma completo",
-      "b) La transcripción requiere cebador obligatoriamente; la replicación no",
-      "c) La transcripción ocurre solo en mitocondrias; la replicación solo en cloroplastos",
-      "d) La transcripción produce proteínas directamente; la replicación produce lípidos"
+      "A) A la repulsión entre las nubes electrónicas de los átomos de oxígeno.",
+      "B) A las fuerzas de cohesión interna generadas por la red de puentes de hidrógeno.",
+      "C) A la presencia de solutos disueltos que empujan las moléculas hacia la superficie.",
+      "D) A la gravedad que actúa con más fuerza sobre las moléculas de la capa superior."
     ],
-    respuestaCorrecta: 0, // a
+    respuestaCorrecta: 1 // B
   },
   {
-    texto: "¿Cuál de las subunidades de la ARN polimerasa de procariotas es responsable del reconocimiento específico del promotor?",
+    texto: "Si el pH de una solución acuosa disminuye de 7 a 5, ¿qué ha sucedido con la concentración de protones [H+]?",
     opciones: [
-      "a) La subunidad beta",
-      "b) El factor sigma (σ)",
-      "c) La subunidad alfa",
-      "d) La subunidad omega"
+      "A) Ha disminuido 2 veces.",
+      "B) Ha aumentado 2 veces.",
+      "C) Ha aumentado 100 veces.",
+      "D) Ha disminuido 100 veces."
     ],
-    respuestaCorrecta: 1, // b
-  },
-  {
-    texto: "¿Cuál de las siguientes es una característica propia de la fase de elongación de la transcripción?",
-    opciones: [
-      "a) La ARN polimerasa se une al promotor y forma el complejo cerrado",
-      "b) Se incorporan ribonucleótidos complementarios y la enzima avanza por el ADN molde",
-      "c) Ocurre un apareamiento directo entre dos moléculas de ARNm",
-      "d) Se degrada el ADN molde para liberar la cadena de ARN"
-    ],
-    respuestaCorrecta: 1, // b
-  },
-  {
-    texto: "¿Qué utilidad funcional tienen las secuencias palindrómicas en el ADN?",
-    opciones: [
-      "a) Sirven como sitios de unión para proteínas o forman horquillas para la terminación",
-      "b) Impiden físicamente que ocurra la replicación",
-      "c) Aparecen exclusivamente en organismos eucariotas superiores",
-      "d) Obligan a que el ADN se mantenga de forma monocatenaria"
-    ],
-    respuestaCorrecta: 0, // a
-  },
-  {
-    texto: "¿Qué caracteriza a los factores de transcripción de tipo inducible?",
-    opciones: [
-      "a) Se expresan de forma constitutiva e invariable en todos los tejidos",
-      "b) Su actividad depende de señales externas (hormonas, estrés) que los activan o inhiben",
-      "c) Son proteínas que solo existen en organismos procariotas",
-      "d) Tienen la función única de unirse a la cola poli-A del ARNm"
-    ],
-    respuestaCorrecta: 1, // b
-  },
-  {
-    texto: "¿Qué consecuencia biológica provoca la acetilación de las colas de las histonas?",
-    opciones: [
-      "a) Compactación extrema de la cromatina e inhibición de la expresión génica",
-      "b) Relajación de la cromatina al disminuir la carga positiva de las histonas, favoreciendo la transcripción",
-      "c) Ruptura del esqueleto de azúcar-fosfato del ADN",
-      "d) Aumento masivo de la metilación en las islas CpG del ADN"
-    ],
-    respuestaCorrecta: 1, // b
-  },
-  {
-    texto: "¿Con qué finalidad se une GTP al Factor de Iniciación 2 (IF2) en la traducción procariota?",
-    opciones: [
-      "a) Para aportar energía para el ensamblaje del complejo de iniciación y la unión de la subunidad grande",
-      "b) Para catalizar la formación del primer enlace peptídico",
-      "c) Para permitir la translocación del ribosoma del sitio P al sitio A",
-      "d) Para señalizar el reconocimiento del codón AUG por la subunidad 50S"
-    ],
-    respuestaCorrecta: 0, // a
-  },
-  {
-    texto: "¿Cómo actúa la doxiciclina a nivel molecular para inhibir la traducción bacteriana?",
-    opciones: [
-      "a) Se une a la subunidad 50S e inhibe la actividad de la peptidil transferasa",
-      "b) Se une a la subunidad 30S e impide la unión del aminoacil-ARNt al sitio A",
-      "c) Interactúa con el factor EF-G para evitar el movimiento del ribosoma",
-      "d) Provoca una lectura errónea al distorsionar la estructura del sitio A"
-    ],
-    respuestaCorrecta: 1, // b
-  },
-  {
-    texto: "¿Cuáles son los tres codones de terminación (stop) de la traducción?",
-    opciones: [
-      "a) UGG, UAA y UAC",
-      "b) AUG, GUA y UAG",
-      "c) UAA, UAU y UGA",
-      "d) UAA, UAG y UGA"
-    ],
-    respuestaCorrecta: 3, // d
+    respuestaCorrecta: 2 // C
   }
 ];
+
+
 
   // Función para convertir los datos al formato requerido para Excel
   const convertirDatosParaExcel = (preguntas) => {
